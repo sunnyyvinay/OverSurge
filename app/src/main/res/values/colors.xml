@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="shockOrange">#ff5722</color>
+    <color name="shockGray">#b4b4b4</color>
+    <color name="shockWhite">#ffffff</color>
+
+    <color name="reignRed">#EE0303</color>
+    <color name="reignGray">#b4b4b4</color>
+    <color name="reignBlack">#000000</color>
+
+    <color name="uprisingBlue">#0561F8</color>
+    <color name="uprisingYellow">#F8E905</color>
+    <color name="uprisingWhite">#ffffff</color>
+
+    <color name="defiantRed">#EE0303</color>
+    <color name="defiantWhite">#ffffff</color>
+    <color name="defiantBlack">#000000</color>
+
+    <color name="gladiatorPurple">#8D05F8</color>
+    <color name="gladiatorWhite">#ffffff</color>
+    <color name="gladiatorBlack">#000000</color>
+
+    <color name="mayhemPink">#F805CC</color>
+    <color name="mayhemBlack">#000000</color>
+    <color name="mayhemBlue">#05E2F8</color>
+
+    <color name="outlawGreen">#1FF805</color>
+    <color name="outlawBlack">#000000</color>
+    <color name="outlawWhite">#ffffff</color>
+
+    <color name="justiceRed">#C70039</color>
+    <color name="justiceBlue">#214FE1</color>
+    <color name="justiceWhite">#ffffff</color>
+
+    <color name="titanGreen">#089D13</color>
+    <color name="titanBlue">#214FE1</color>
+    <color name="titanWhite">#ffffff</color>
+</resources>

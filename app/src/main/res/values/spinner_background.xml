@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item>
+
+        <layer-list>
+
+            <item>
+                <color
+                    android:color="@android:color/white"/>
+            </item>
+
+            <item>
+                <bitmap
+                    android:gravity="center_vertical|right"
+                    android:src="@drawable/ic_arrow_drop_down_black_24dp"/>
+            </item>
+
+        </layer-list>
+
+    </item>
+</resources>

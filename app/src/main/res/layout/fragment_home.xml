@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/yourAccountText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="70dp"
+                android:fontFamily="casual"
+                android:text="@string/YourAccount"
+                android:textColor="?attr/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/accountCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="5dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/accountProblem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.61" />
+
+                    <TextView
+                        android:id="@+id/accountGamesWon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.369"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/accountLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="140dp"
+                        android:layout_marginBottom="135dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorPrimaryDark"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.582"
+                        app:layout_constraintStart_toEndOf="@+id/accountIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/accountUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="90dp"
+                        android:layout_marginBottom="135dp"
+                        android:fontFamily="monospace"
+                        android:textAlignment="viewEnd"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.272"
+                        tools:visibility="visible" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/accountIcon"
+                        android:layout_width="97dp"
+                        android:layout_height="85dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@mipmap/ic_launcher_round"
+                        app:civ_border_color="?attr/colorPrimary"
+                        app:civ_border_width="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountTankIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:background="?attr/colorPrimary"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.043"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.715"
+                        app:srcCompat="@drawable/tankicon"
+                        tools:srcCompat="@drawable/tankicon"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountTankSRIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:src="@mipmap/ic_launcher_round"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountTankIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.612"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/accountTankSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.025"
+                        app:layout_constraintStart_toEndOf="@+id/accountTankIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/accountTankSRIcon"
+                        app:layout_constraintVertical_bias="0.2"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountDamageIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:background="?attr/colorPrimary"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.431"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.715"
+                        app:srcCompat="@drawable/damageicon"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountDamageSRIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:src="@mipmap/ic_launcher_round"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.612"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/accountDamageSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.044"
+                        app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.801"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountSupportIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="65dp"
+                        android:background="?attr/colorPrimary"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.83"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.53"
+                        app:srcCompat="@drawable/supporticon"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountSupportSRIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:src="@mipmap/ic_launcher_round"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountSupportIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.612"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/accountSupportSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.3"
+                        app:layout_constraintStart_toEndOf="@+id/accountSupportIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.801"
+                        tools:visibility="visible" />
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/owNews"
+                android:layout_width="411dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="349dp"
+                android:fontFamily="casual"
+                android:text="@string/OverwatchNews"
+                android:textColor="?attr/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/news1"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newsTitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="63dp"
+                        android:layout_marginBottom="63dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="175dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/newsImage1"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.52" />
+
+                    <ImageView
+                        android:id="@+id/newsImage1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="295dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="44dp"
+                        android:layout_marginBottom="42dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/news2"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newsTitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="63dp"
+                        android:layout_marginBottom="63dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="175dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/newsImage2"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.52" />
+
+                    <ImageView
+                        android:id="@+id/newsImage2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="295dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="44dp"
+                        android:layout_marginBottom="42dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/news3"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newsTitle3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="63dp"
+                        android:layout_marginBottom="63dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="175dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/newsImage3"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.52" />
+
+                    <ImageView
+                        android:id="@+id/newsImage3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="295dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="44dp"
+                        android:layout_marginBottom="42dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/news4"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newsTitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="63dp"
+                        android:layout_marginBottom="63dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="175dp"
+                        android:textAlignment="viewStart"
+                        android:textColor="?attr/colorAccent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/newsImage4"
+                        app:layout_constraintHorizontal_bias="0.125"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.52" />
+
+                    <ImageView
+                        android:id="@+id/newsImage4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="295dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="44dp"
+                        android:layout_marginBottom="42dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/title_home" />
+
+</FrameLayout>

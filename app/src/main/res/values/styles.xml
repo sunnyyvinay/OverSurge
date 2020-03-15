@@ -1,0 +1,76 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Shock" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/shockOrange</item>
+        <item name="colorPrimaryDark">@color/shockGray</item>
+        <item name="colorAccent">@color/shockWhite</item>
+        <item name="colorControlNormal">@color/shockGray</item>
+        <item name="colorControlActivated">@color/shockOrange</item>
+    </style>
+
+    <style name="Shocklight" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/shockOrange</item>
+        <item name="colorPrimaryDark">@color/shockGray</item>
+        <item name="colorAccent">@color/reignBlack</item>
+        <item name="colorControlNormal">@color/shockGray</item>
+        <item name="colorControlActivated">@color/shockOrange</item>
+        <item name="android:windowBackground">@color/shockWhite</item>
+    </style>
+
+    <style name="Reign" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/reignRed</item>
+        <item name="colorPrimaryDark">@color/reignGray</item>
+        <item name="colorAccent">@color/reignBlack</item>
+    </style>
+
+    <style name="Uprising" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/uprisingBlue</item>
+        <item name="colorPrimaryDark">@color/uprisingYellow</item>
+        <item name="colorAccent">@color/uprisingWhite</item>
+    </style>
+
+    <style name="Defiant" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/defiantRed</item>
+        <item name="colorPrimaryDark">@color/defiantBlack</item>
+        <item name="colorAccent">@color/defiantWhite</item>
+    </style>
+
+    <style name="Gladiator" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/gladiatorPurple</item>
+        <item name="colorPrimaryDark">@color/gladiatorBlack</item>
+        <item name="colorAccent">@color/gladiatorWhite</item>
+    </style>
+
+    <style name="Mayhem" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/mayhemPink</item>
+        <item name="colorPrimaryDark">@color/mayhemBlack</item>
+        <item name="colorAccent">@color/mayhemBlue</item>
+    </style>
+
+    <style name="Outlaw" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/outlawGreen</item>
+        <item name="colorPrimaryDark">@color/outlawBlack</item>
+        <item name="colorAccent">@color/outlawWhite</item>
+    </style>
+
+    <style name="Justice" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/justiceRed</item>
+        <item name="colorPrimaryDark">@color/justiceBlue</item>
+        <item name="colorAccent">@color/justiceWhite</item>
+    </style>
+
+    <style name="Titan" parent="Theme.AppCompat.NoActionBar" >
+        <item name="colorPrimary">@color/titanGreen</item>
+        <item name="colorPrimaryDark">@color/titanBlue</item>
+        <item name="colorAccent">@color/titanWhite</item>
+    </style>
+
+</resources>
