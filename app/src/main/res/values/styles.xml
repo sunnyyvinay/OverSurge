@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Shock" parent="Theme.AppCompat.NoActionBar" >
+    <style name="Shock" parent="Theme.AppCompat" >
         <item name="colorPrimary">@color/shockOrange</item>
         <item name="colorPrimaryDark">@color/shockGray</item>
         <item name="colorAccent">@color/shockWhite</item>

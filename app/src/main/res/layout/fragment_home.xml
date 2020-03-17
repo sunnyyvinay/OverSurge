@@ -37,7 +37,8 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    tools:visibility="visible">
 
                     <TextView
                         android:id="@+id/accountProblem"
@@ -130,6 +131,34 @@
                         tools:visibility="visible" />
 
                     <ImageView
+                        android:id="@+id/accountDamageSRIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:src="@mipmap/ic_launcher_round"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.733"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/accountDamageIcon"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:background="?attr/colorPrimary"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.431"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.836"
+                        app:srcCompat="@drawable/damageicon"
+                        tools:visibility="visible" />
+
+                    <ImageView
                         android:id="@+id/accountTankIcon"
                         android:layout_width="45dp"
                         android:layout_height="35dp"
@@ -140,7 +169,7 @@
                         app:layout_constraintHorizontal_bias="0.043"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.715"
+                        app:layout_constraintVertical_bias="0.836"
                         app:srcCompat="@drawable/tankicon"
                         tools:srcCompat="@drawable/tankicon"
                         tools:visibility="visible" />
@@ -155,7 +184,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/accountTankIcon"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.612"
+                        app:layout_constraintVertical_bias="0.733"
                         tools:visibility="visible" />
 
                     <TextView
@@ -169,35 +198,7 @@
                         app:layout_constraintHorizontal_bias="0.025"
                         app:layout_constraintStart_toEndOf="@+id/accountTankIcon"
                         app:layout_constraintTop_toBottomOf="@+id/accountTankSRIcon"
-                        app:layout_constraintVertical_bias="0.2"
-                        tools:visibility="visible" />
-
-                    <ImageView
-                        android:id="@+id/accountDamageIcon"
-                        android:layout_width="45dp"
-                        android:layout_height="35dp"
-                        android:background="?attr/colorPrimary"
-                        android:src="@mipmap/ic_launcher"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.431"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.715"
-                        app:srcCompat="@drawable/damageicon"
-                        tools:visibility="visible" />
-
-                    <ImageView
-                        android:id="@+id/accountDamageSRIcon"
-                        android:layout_width="45dp"
-                        android:layout_height="35dp"
-                        android:src="@mipmap/ic_launcher_round"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.612"
+                        app:layout_constraintVertical_bias="0.36"
                         tools:visibility="visible" />
 
                     <TextView
@@ -211,7 +212,7 @@
                         app:layout_constraintHorizontal_bias="0.044"
                         app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.801"
+                        app:layout_constraintVertical_bias="0.911"
                         tools:visibility="visible" />
 
                     <ImageView
@@ -226,7 +227,7 @@
                         app:layout_constraintHorizontal_bias="0.83"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.53"
+                        app:layout_constraintVertical_bias="0.73"
                         app:srcCompat="@drawable/supporticon"
                         tools:visibility="visible" />
 
@@ -240,7 +241,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/accountSupportIcon"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.612"
+                        app:layout_constraintVertical_bias="0.733"
                         tools:visibility="visible" />
 
                     <TextView
@@ -250,13 +251,121 @@
                         android:text="0000"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.3"
+                        app:layout_constraintHorizontal_bias="0.312"
                         app:layout_constraintStart_toEndOf="@+id/accountSupportIcon"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.801"
+                        app:layout_constraintVertical_bias="0.911"
                         tools:visibility="visible" />
 
                 </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/combinedCard"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" >
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/accountCombinedIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_launcher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/accountCombinedSR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/accountCombinedIcon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/accountCombinedText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COMBINED"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toEndOf="@+id/accountCombinedSR"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/playerDetailsCard"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:clickable="true"
+                android:visibility="gone">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/playerDetailsText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/PlayerDetails"
+                        android:textColor="#2196F3"
+                        android:textSize="18sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/keyboard_arrow_right_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.3"
+                        app:layout_constraintStart_toEndOf="@+id/playerDetailsText2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/keyboard_arrow_right_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/playerDetailsText2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/keyboard_arrow_right_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.6"
+                        app:layout_constraintStart_toEndOf="@+id/playerDetailsText2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+                </android.support.constraint.ConstraintLayout>
+
             </android.support.v7.widget.CardView>
 
             <TextView

@@ -15,4 +15,5 @@
     <string name="AccountNotSet">Your Blizzard account has not been entered. Go to "Settings" and enter your username and tag"</string>
     <string name="AccountPrivateProfile">Your account is private. For your stats to show, switch to public profile.</string>
     <string name="AccountNotExist">The Blizzard account that you entered does not exist. Please fix it in "Settings" or check your internet connection</string>
+    <string name="PlayerDetails">Click to view more details</string>
 </resources>

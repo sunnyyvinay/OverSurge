@@ -72,6 +72,12 @@ public class HomeFragment extends Fragment {
 
     AlertDialog internetCheck;
 
+    CardView playerDetailsCard;
+
+    ImageView accountCombinedIcon;
+    TextView accountCombinedSR;
+    CardView combinedCard;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +115,12 @@ public class HomeFragment extends Fragment {
         accountDamageSR = view.findViewById(R.id.accountDamageSR);
         accountSupportSR = view.findViewById(R.id.accountSupportSR);
         accountProblem = view.findViewById(R.id.accountProblem);
+
+        playerDetailsCard = view.findViewById(R.id.playerDetailsCard);
+
+        accountCombinedIcon = view.findViewById(R.id.accountCombinedIcon);
+        accountCombinedSR = view.findViewById(R.id.accountCombinedSR);
+        combinedCard = view.findViewById(R.id.combinedCard);
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();
 
@@ -152,6 +164,8 @@ public class HomeFragment extends Fragment {
             accountSupportSR.setVisibility(View.INVISIBLE);
             accountGamesWon.setVisibility(View.INVISIBLE);
             accountLevel.setVisibility(View.INVISIBLE);
+            combinedCard.setVisibility(View.GONE);
+            playerDetailsCard.setVisibility(View.GONE);
             accountProblem.setText(R.string.AccountNotSet);
         } else {
             accountLink = "https://ovrstat.com/stats/" + accountPlatform + "/" + accountName + "-" + accountTag;
@@ -159,6 +173,18 @@ public class HomeFragment extends Fragment {
         }
 
         new owNewsTask().execute();
+
+        playerDetailsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                intent.putExtra("CONSOLE", accountPlatform);
+                intent.putExtra("USERNAME", accountName);
+                intent.putExtra("BATTLE_TAG", accountTag);
+                intent.putExtra("Fragment", "Home");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -308,22 +334,32 @@ public class HomeFragment extends Fragment {
                     String damageRankURL = "";
                     int supportSR = 0;
                     String supportRankURL = "";
+                    int combinedSR = 0;
+                    int numOfRoles = 0;
 
                     for (int j = 0; j < ratings.length(); j++) {
                         JSONObject currentRole = ratings.getJSONObject(j);
                         if (currentRole.getString("role").equals("tank")) {
                             tankSR = currentRole.getInt("level");
-                            tankRankURL = currentRole.getString("rankIcon");;
+                            tankRankURL = currentRole.getString("rankIcon");
+                            combinedSR += tankSR;
+                            numOfRoles++;
                         }
                         else if (currentRole.getString("role").equals("damage")) {
                             damageSR = currentRole.getInt("level");
                             damageRankURL = currentRole.getString("rankIcon");
+                            combinedSR += damageSR;
+                            numOfRoles++;
                         }
                         else if (currentRole.getString("role").equals("support")) {
                             supportSR = currentRole.getInt("level");
                             supportRankURL = currentRole.getString("rankIcon");
+                            combinedSR += supportSR;
+                            numOfRoles++;
                         }
                     }
+
+                    combinedSR /= numOfRoles;
 
                     if (tankSR == 0) {
                         accountTankSR.setText("-------");
@@ -362,7 +398,11 @@ public class HomeFragment extends Fragment {
                     accountGamesWon.setText((gamesWon) + " games won");
                     accountUsername.setText(name);
 
+                    combinedCard.setVisibility(View.VISIBLE);
+                    playerDetailsCard.setVisibility(View.VISIBLE);
                     accountLevel.setText("Level " + (level));
+                    accountCombinedSR.setText(Integer.toString(combinedSR));
+                    Picasso.get().load(getCompIcon(combinedSR)).into(accountCombinedIcon);
 
                 } catch (JSONException e) {
                     // display quick play stats
@@ -381,6 +421,8 @@ public class HomeFragment extends Fragment {
                     accountTankIcon.setVisibility(View.INVISIBLE);
                     accountSupportIcon.setVisibility(View.INVISIBLE);
                     accountDamageIcon.setVisibility(View.INVISIBLE);
+                    playerDetailsCard.setVisibility(View.VISIBLE);
+                    combinedCard.setVisibility(View.GONE);
 
                     if (stats.getBoolean("private")) {
                         accountGamesWon.setVisibility(View.INVISIBLE);
@@ -408,6 +450,8 @@ public class HomeFragment extends Fragment {
                 accountSupportSR.setVisibility(View.INVISIBLE);
                 accountGamesWon.setVisibility(View.INVISIBLE);
                 accountLevel.setVisibility(View.INVISIBLE);
+                combinedCard.setVisibility(View.GONE);
+                playerDetailsCard.setVisibility(View.GONE);
                 accountProblem.setText(R.string.AccountNotExist);
                 e.printStackTrace();
             }
@@ -426,4 +470,28 @@ public class HomeFragment extends Fragment {
         return false;
     }
 
+    public String getCompIcon(int rating) {
+        if (rating >= 1 && rating <= 1499) {
+            //bronze
+            return "https://vignette.wikia.nocookie.net/overwatch/images/8/8f/Competitive_Bronze_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023401";
+        } else if (rating >= 1500 && rating <= 1999) {
+            //silver
+            return "https://vignette.wikia.nocookie.net/overwatch/images/f/fe/Competitive_Silver_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023740";
+        } else if (rating >= 2000 && rating <= 2499) {
+            //gold
+            return "https://vignette.wikia.nocookie.net/overwatch/images/4/44/Competitive_Gold_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023755";
+        } else if (rating >= 2500 && rating <= 2999) {
+            //plat
+            return "https://vignette.wikia.nocookie.net/overwatch/images/e/e4/Competitive_Platinum_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023807";
+        } else if (rating >= 3000 && rating <= 3499) {
+            //diamond
+            return "https://vignette.wikia.nocookie.net/overwatch/images/3/3f/Competitive_Diamond_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023818";
+        } else if (rating >= 3500 && rating <= 3999) {
+            //masters
+            return "https://vignette.wikia.nocookie.net/overwatch/images/5/50/Competitive_Master_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023832";
+        } else {
+            //gm
+            return "https://vignette.wikia.nocookie.net/overwatch/images/c/cc/Competitive_Grandmaster_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023845";
+        }
+    }
 }

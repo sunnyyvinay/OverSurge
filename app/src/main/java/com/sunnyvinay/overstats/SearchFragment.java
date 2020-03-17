@@ -2,6 +2,7 @@ package com.sunnyvinay.overstats;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -52,9 +53,13 @@ public class SearchFragment extends Fragment {
     TextView cardGamesWon;
     ImageView quickPlayIcon;
     TextView privateProfileText;
+    TextView moreDetailsText;
+    ImageView combinedSRIcon;
 
     private String console;
     private String link;
+    String username;
+    String tag;
 
     private static final String[] consoles = {"PC", "XBOX", "PS4"};
 
@@ -86,6 +91,11 @@ public class SearchFragment extends Fragment {
         cardGamesWon = view.findViewById(R.id.cardGamesWon);
         quickPlayIcon = view.findViewById(R.id.quickPlayIcon);
         privateProfileText = view.findViewById(R.id.privateProfileText);
+
+        moreDetailsText = view.findViewById(R.id.moreDetailsText);
+        moreDetailsText.setVisibility(View.VISIBLE);
+
+        combinedSRIcon = view.findViewById(R.id.combinedSRIcon);
 
         //Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -131,8 +141,8 @@ public class SearchFragment extends Fragment {
 
                 privateProfileText.setVisibility(View.INVISIBLE);
 
-                String username = usernameEnter.getText().toString();
-                String tag = tagEnter.getText().toString();
+                username = usernameEnter.getText().toString();
+                tag = tagEnter.getText().toString();
 
                 link = "https://ovrstat.com/stats/" + console + "/" + username + "-" + tag;
 
@@ -141,6 +151,19 @@ public class SearchFragment extends Fragment {
                 hideKeyboard(getActivity());
             }
         });
+
+        statsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                intent.putExtra("CONSOLE", console);
+                intent.putExtra("USERNAME", username);
+                intent.putExtra("BATTLE_TAG", tag);
+                intent.putExtra("Fragment", "Search");
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -265,6 +288,7 @@ public class SearchFragment extends Fragment {
                     cardDamageSR.setVisibility(View.VISIBLE);
                     cardSupportSR.setVisibility(View.VISIBLE);
                     cardCombinedSR.setVisibility(View.VISIBLE);
+                    combinedSRIcon.setVisibility(View.VISIBLE);
 
                     tankText.setVisibility(View.VISIBLE);
                     damageText.setVisibility(View.VISIBLE);
@@ -277,6 +301,7 @@ public class SearchFragment extends Fragment {
                     cardName.setText(name);
                     cardCombinedSR.setText(Integer.toString(combinedSR));
                     levelText.setText(Integer.toString(level));
+                    Picasso.get().load(getCompIcon(combinedSR)).into(combinedSRIcon);
 
                 } catch (JSONException e) {
                     // display quick play stats
@@ -298,6 +323,7 @@ public class SearchFragment extends Fragment {
                     damageText.setVisibility(View.INVISIBLE);
                     supportText.setVisibility(View.INVISIBLE);
                     combinedText.setVisibility(View.INVISIBLE);
+                    combinedSRIcon.setVisibility(View.INVISIBLE);
 
                     if (stats.getBoolean("private")) {
                         cardGamesWon.setVisibility(View.INVISIBLE);
@@ -332,5 +358,30 @@ public class SearchFragment extends Fragment {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public String getCompIcon(int rating) {
+        if (rating >= 1 && rating <= 1499) {
+            //bronze
+            return "https://vignette.wikia.nocookie.net/overwatch/images/8/8f/Competitive_Bronze_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023401";
+        } else if (rating >= 1500 && rating <= 1999) {
+            //silver
+            return "https://vignette.wikia.nocookie.net/overwatch/images/f/fe/Competitive_Silver_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023740";
+        } else if (rating >= 2000 && rating <= 2499) {
+            //gold
+            return "https://vignette.wikia.nocookie.net/overwatch/images/4/44/Competitive_Gold_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023755";
+        } else if (rating >= 2500 && rating <= 2999) {
+            //plat
+            return "https://vignette.wikia.nocookie.net/overwatch/images/e/e4/Competitive_Platinum_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023807";
+        } else if (rating >= 3000 && rating <= 3499) {
+            //diamond
+            return "https://vignette.wikia.nocookie.net/overwatch/images/3/3f/Competitive_Diamond_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023818";
+        } else if (rating >= 3500 && rating <= 3999) {
+            //masters
+            return "https://vignette.wikia.nocookie.net/overwatch/images/5/50/Competitive_Master_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023832";
+        } else {
+            //gm
+            return "https://vignette.wikia.nocookie.net/overwatch/images/c/cc/Competitive_Grandmaster_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023845";
+        }
     }
 }
