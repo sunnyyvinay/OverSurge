@@ -78,6 +78,9 @@ public class HomeFragment extends Fragment {
     TextView accountCombinedSR;
     CardView combinedCard;
 
+    CardView patchCard;
+    TextView patchTitle;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +124,9 @@ public class HomeFragment extends Fragment {
         accountCombinedIcon = view.findViewById(R.id.accountCombinedIcon);
         accountCombinedSR = view.findViewById(R.id.accountCombinedSR);
         combinedCard = view.findViewById(R.id.combinedCard);
+
+        patchCard = view.findViewById(R.id.patchCard);
+        patchTitle = view.findViewById(R.id.patchTitle);
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();
 
@@ -173,6 +179,8 @@ public class HomeFragment extends Fragment {
         }
 
         new owNewsTask().execute();
+
+        new getPatchNotes().execute();
 
         playerDetailsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -455,6 +463,40 @@ public class HomeFragment extends Fragment {
                 accountProblem.setText(R.string.AccountNotExist);
                 e.printStackTrace();
             }
+        }
+    }
+
+    private class getPatchNotes extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            Document titleDoc;
+            String patchTitle = "Latest Patch Notes";
+            try {
+                titleDoc = Jsoup.connect("https://blizztrack.com/overwatch/retail").get();
+
+                //Elements titles = titleDoc.select("a[data-media-title]");
+                Elements titles = titleDoc.select("h2");
+
+                for (Element title : titles) {
+                    patchTitle = title.text();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return patchTitle;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            patchTitle.setText(result);
+
+            patchCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), PatchActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

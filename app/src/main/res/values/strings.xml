@@ -16,4 +16,6 @@
     <string name="AccountPrivateProfile">Your account is private. For your stats to show, switch to public profile.</string>
     <string name="AccountNotExist">The Blizzard account that you entered does not exist. Please fix it in "Settings" or check your internet connection</string>
     <string name="PlayerDetails">Click to view more details</string>
+    <string name="LatestPatchNotes">LATEST PATCH NOTES</string>
+    <string name="PatchDetails">Click to view patch notes</string>
 </resources>
