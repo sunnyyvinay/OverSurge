@@ -25,13 +25,14 @@ public class SettingsFragment extends Fragment {
     private EditText userEnter;
     private EditText tagEnter;
     private Spinner platformSelect;
+    private Switch scoresSwitch;
 
     private static final String[] consoles = {"PC", "XBOX", "PS4"};
 
     SharedPreferences settings;
     private SharedPreferences.Editor settingsEditor;
 
-    FrameLayout helpFrame;
+    FrameLayout settingsFrame;
 
     BottomNavigationView bottomNavigationView;
 
@@ -46,15 +47,22 @@ public class SettingsFragment extends Fragment {
         userEnter = view.findViewById(R.id.userEnter);
         tagEnter = view.findViewById(R.id.tagEnter);
         platformSelect = view.findViewById(R.id.platformSelect);
+        scoresSwitch = view.findViewById(R.id.scoresSwitch);
 
         bottomNavigationView = getActivity().findViewById(R.id.navigation);
 
-        helpFrame = view.findViewById(R.id.helpFrame);
+        settingsFrame = view.findViewById(R.id.settingsFrame);
 
         if (settings.getBoolean("Theme", true)) {
             themeSwitch.setChecked(true);
         } else {
             themeSwitch.setChecked(false);
+        }
+
+        if (settings.getBoolean("Scores", false)) {
+            scoresSwitch.setChecked(true);
+        } else {
+            scoresSwitch.setChecked(false);
         }
 
         userEnter.setText(settings.getString("Username", ""));
@@ -88,6 +96,27 @@ public class SettingsFragment extends Fragment {
                 }
                 getActivity().recreate();
                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+            }
+        });
+
+        scoresSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast toast = Toast.makeText(getActivity(),
+                            "Match scores will show",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                    settingsEditor.putBoolean("Scores", true);
+                    settingsEditor.apply();
+
+                } else {
+                    Toast toast = Toast.makeText(getActivity(),
+                            "Match scores will not show",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                    settingsEditor.putBoolean("Scores", false);
+                    settingsEditor.apply();
+                }
             }
         });
 

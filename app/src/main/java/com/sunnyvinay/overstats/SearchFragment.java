@@ -188,7 +188,7 @@ public class SearchFragment extends Fragment {
             try {
                 return Utility.downloadDataFromUrl(urls[0]);
             } catch (IOException e) {
-                Looper.prepare();
+                //Looper.prepare();
                 return "Unable to retrieve data. URL may be invalid.";
             }
         }

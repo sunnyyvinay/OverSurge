@@ -18,4 +18,8 @@
     <string name="PlayerDetails">Click to view more details</string>
     <string name="LatestPatchNotes">LATEST PATCH NOTES</string>
     <string name="PatchDetails">Click to view patch notes</string>
+    <string name="OverwatchLeague">OVERWATCH LEAGUE</string>
+    <string name="NoMatchData">No match data is currently available</string>
+    <string name="ScoreConfig">Hide/Show match scores in "Settings"</string>
+    <string name="UpcomingMatch">This match has not started</string>
 </resources>

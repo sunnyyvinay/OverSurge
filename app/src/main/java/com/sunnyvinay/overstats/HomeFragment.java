@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -81,6 +82,20 @@ public class HomeFragment extends Fragment {
     CardView patchCard;
     TextView patchTitle;
 
+    ConstraintLayout matchLayout;
+    ConstraintLayout noMatchLayout;
+    ImageView liveIcon;
+    ImageView awayTeamIcon;
+    TextView awayScore;
+    TextView matchText;
+    TextView homeScore;
+    ImageView homeTeamIcon;
+    TextView awayTeam;
+    TextView homeTeam;
+    TextView hideScoresOption;
+
+    boolean showScores;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,8 +140,22 @@ public class HomeFragment extends Fragment {
         accountCombinedSR = view.findViewById(R.id.accountCombinedSR);
         combinedCard = view.findViewById(R.id.combinedCard);
 
+        // Patch notes
         patchCard = view.findViewById(R.id.patchCard);
         patchTitle = view.findViewById(R.id.patchTitle);
+
+        // OWL
+        matchLayout = view.findViewById(R.id.matchLayout);
+        noMatchLayout = view.findViewById(R.id.noMatchLayout);
+        liveIcon = view.findViewById(R.id.liveIcon);
+        awayTeamIcon = view.findViewById(R.id.awayTeamIcon);
+        awayScore = view.findViewById(R.id.awayScore);
+        matchText = view.findViewById(R.id.matchText);
+        homeScore = view.findViewById(R.id.homeScore);
+        homeTeamIcon = view.findViewById(R.id.homeTeamIcon);
+        awayTeam = view.findViewById(R.id.awayTeam);
+        homeTeam = view.findViewById(R.id.homeTeam);
+        hideScoresOption = view.findViewById(R.id.hideScoreOptions);
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();
 
@@ -143,6 +172,9 @@ public class HomeFragment extends Fragment {
 
         accountName = settings.getString("Username", "");
         accountTag = settings.getString("Tag", "");
+
+        // Get scores configuration
+        showScores = settings.getBoolean("Scores", false);
 
         switch(settings.getInt("Platform", 0)) {
             case 0:
@@ -179,6 +211,8 @@ public class HomeFragment extends Fragment {
         }
 
         new owNewsTask().execute();
+
+        new getOWL().execute();
 
         new getPatchNotes().execute();
 
@@ -305,7 +339,7 @@ public class HomeFragment extends Fragment {
             try {
                 return Utility.downloadDataFromUrl(urls[0]);
             } catch (IOException e) {
-                Looper.prepare();
+                //Looper.prepare();
                 return "Unable to retrieve data. URL may be invalid.";
             }
         }
@@ -497,6 +531,85 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+        }
+    }
+
+    private class getOWL extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                return Utility.downloadDataFromUrl("https://api.overwatchleague.com/live-match");
+            } catch (IOException e) {
+                //Looper.prepare();
+                return "Unable to retrieve data. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // for ui elements
+            try {
+                JSONObject response = new JSONObject(result);
+                JSONObject data = response.getJSONObject("data");
+                JSONObject liveMatch = data.getJSONObject("liveMatch");
+
+                if (liveMatch.equals(null)) {
+                    // No match data available
+                    matchLayout.setVisibility(View.GONE);
+                    noMatchLayout.setVisibility(View.VISIBLE);
+                } else {
+                    String liveStatus = liveMatch.getString("liveStatus");
+                    noMatchLayout.setVisibility(View.GONE);
+                    matchLayout.setVisibility(View.VISIBLE);
+                    awayTeamIcon.setVisibility(View.VISIBLE);
+                    matchText.setVisibility(View.VISIBLE);
+                    homeTeamIcon.setVisibility(View.VISIBLE);
+                    awayTeam.setVisibility(View.VISIBLE);
+                    homeTeam.setVisibility(View.VISIBLE);
+
+                    JSONArray competitors = liveMatch.getJSONArray("competitors");
+                    JSONObject away = competitors.getJSONObject(0);
+                    JSONObject home = competitors.getJSONObject(1);
+
+                    Picasso.get().load(away.getString("logo")).into(awayTeamIcon);
+                    Picasso.get().load(home.getString("logo")).into(homeTeamIcon);
+                    awayTeam.setText(away.getString("abbreviatedName"));
+                    homeTeam.setText(home.getString("abbreviatedName"));
+
+                    if (liveStatus.equals("LIVE")) {
+                        liveIcon.setVisibility(View.VISIBLE);
+                        awayScore.setVisibility(View.VISIBLE);
+                        homeScore.setVisibility(View.VISIBLE);
+                        matchText.setText("-");
+                        hideScoresOption.setText(R.string.ScoreConfig);
+
+                        JSONArray scores = liveMatch.getJSONArray("scores");
+                        String awayPoints = (scores.getJSONObject(0)).getString("value");
+                        String homePoints = (scores.getJSONObject(1)).getString("value");
+
+                        if (showScores) {
+                            awayScore.setText(awayPoints);
+                            homeScore.setText(homePoints);
+                        } else {
+                            awayScore.setText("X");
+                            homeScore.setText("X");
+                        }
+
+
+                    } else {
+                        liveIcon.setVisibility(View.INVISIBLE);
+                        awayScore.setVisibility(View.INVISIBLE);
+                        homeScore.setVisibility(View.INVISIBLE);
+                        matchText.setText("VS");
+                        hideScoresOption.setText(R.string.UpcomingMatch);
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                matchLayout.setVisibility(View.GONE);
+                noMatchLayout.setVisibility(View.VISIBLE);
+            }
         }
     }
 
