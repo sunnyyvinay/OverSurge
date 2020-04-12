@@ -22,4 +22,7 @@
     <string name="NoMatchData">No match data is currently available</string>
     <string name="ScoreConfig">Hide/Show match scores in "Settings"</string>
     <string name="UpcomingMatch">This match has not started</string>
+    <string name="OWLDetails">Click to view more OWL details</string>
+    <string name="OWLSchedule">View the OWL Schedule</string>
+    <string name="OWLStanding">View the OWL Standings</string>
 </resources>

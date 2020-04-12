@@ -16,7 +16,7 @@
         <item name="colorControlActivated">@color/shockOrange</item>
     </style>
 
-    <style name="Shocklight" parent="Theme.AppCompat.Light.NoActionBar" >
+    <style name="Shocklight" parent="Theme.AppCompat.Light" >
         <item name="colorPrimary">@color/shockOrange</item>
         <item name="colorPrimaryDark">@color/shockGray</item>
         <item name="colorAccent">@color/reignBlack</item>

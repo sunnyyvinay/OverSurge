@@ -1,5 +1,7 @@
 package com.sunnyvinay.overstats;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +12,20 @@ public class PlayerActivity extends AppCompatActivity {
     WebView playerBrowser;
     ActionBar playerBar;
     String fragment;
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        settings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+
+        if (settings.getBoolean("Theme", true)) {
+            this.setTheme(R.style.Shock);
+        } else {
+            this.setTheme(R.style.Shocklight);
+        }
+
         setContentView(R.layout.activity_player);
 
         playerBrowser = findViewById(R.id.playerBrowser);

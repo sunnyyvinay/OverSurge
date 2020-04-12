@@ -96,6 +96,8 @@ public class HomeFragment extends Fragment {
 
     boolean showScores;
 
+    CardView owlDetailsCard;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,7 +146,7 @@ public class HomeFragment extends Fragment {
         patchCard = view.findViewById(R.id.patchCard);
         patchTitle = view.findViewById(R.id.patchTitle);
 
-        // OWL
+        // OWLActivity
         matchLayout = view.findViewById(R.id.matchLayout);
         noMatchLayout = view.findViewById(R.id.noMatchLayout);
         liveIcon = view.findViewById(R.id.liveIcon);
@@ -156,6 +158,8 @@ public class HomeFragment extends Fragment {
         awayTeam = view.findViewById(R.id.awayTeam);
         homeTeam = view.findViewById(R.id.homeTeam);
         hideScoresOption = view.findViewById(R.id.hideScoreOptions);
+
+        owlDetailsCard = view.findViewById(R.id.owlDetailsCard);
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();
 
@@ -224,6 +228,14 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("USERNAME", accountName);
                 intent.putExtra("BATTLE_TAG", accountTag);
                 intent.putExtra("Fragment", "Home");
+                startActivity(intent);
+            }
+        });
+
+        owlDetailsCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OWLActivity.class);
                 startActivity(intent);
             }
         });
