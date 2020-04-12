@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
@@ -98,6 +99,8 @@ public class HomeFragment extends Fragment {
 
     CardView owlDetailsCard;
 
+    ImageView refreshButton;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +163,18 @@ public class HomeFragment extends Fragment {
         hideScoresOption = view.findViewById(R.id.hideScoreOptions);
 
         owlDetailsCard = view.findViewById(R.id.owlDetailsCard);
+
+        refreshButton = view.findViewById(R.id.refreshButton);
+
+        if (settings.getBoolean("Theme", true)) {
+            int imageResource = getResources().getIdentifier("@drawable/refresh_white", null, "com.sunnyvinay.overstats");
+            Drawable res = getResources().getDrawable(imageResource);
+            refreshButton.setImageDrawable(res);
+        } else {
+            int imageResource = getResources().getIdentifier("@drawable/refresh_black", null, "com.sunnyvinay.overstats");
+            Drawable res = getResources().getDrawable(imageResource);
+            refreshButton.setImageDrawable(res);
+        }
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();
 
@@ -237,6 +252,13 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), OWLActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new HomeFragment());
             }
         });
     }

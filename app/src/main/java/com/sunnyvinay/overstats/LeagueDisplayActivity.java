@@ -39,6 +39,7 @@ public class LeagueDisplayActivity extends AppCompatActivity {
         displayWeb.setWebViewClient(new WebViewClient());
         displayWeb.getSettings().setJavaScriptEnabled(true);
         displayWeb.getSettings().setDomStorageEnabled(true);
+        displayWeb.getSettings().setUseWideViewPort(true);
         displayWeb.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
 
         if (target.equals("OWL Schedule")) {
@@ -46,8 +47,6 @@ public class LeagueDisplayActivity extends AppCompatActivity {
         } else {
             displayWeb.loadUrl("https://overwatchleague.com/en-us/standings");
         }
-
-
     }
 
     @Override

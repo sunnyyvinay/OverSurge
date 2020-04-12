@@ -7,7 +7,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="AboutApp">Oversurge is an app that gives you Overwatch stats for any player on any platform. Just click on "Search", choose the platform from the drop down, and enter a player. Any player entered must have a public profile. The names are cap sensitive.</string>
+    <string name="AboutApp">OverSurge is an app that gives you player stats, news, patch notes, and Overwatch League info. Any player entered must have a public profile and usernames are cap sensitive.</string>
     <string name="OverwatchNews">LATEST OVERWATCH NEWS</string>
     <string name="YourAccount">YOUR ACCOUNT</string>
     <string name="AccountOptional">You can save your account and it will be displayed on the home page for easy access. This is optional and can be changed at any time.</string>
