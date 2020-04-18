@@ -2,10 +2,13 @@ package com.sunnyvinay.overstats;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -21,6 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -28,12 +33,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
     private Spinner consoleSpinner;
     Button searchButton;
     private EditText usernameEnter;
     private EditText tagEnter;
+
+    SharedPreferences settings;
 
     TextView cardName;
     TextView cardCombinedSR;
@@ -60,6 +69,9 @@ public class SearchFragment extends Fragment {
     private String link;
     String username;
     String tag;
+
+    ImageView addButton;
+    ArrayList<Player> players = new ArrayList<>();
 
     private static final String[] consoles = {"PC", "XBOX", "PS4"};
 
@@ -96,6 +108,8 @@ public class SearchFragment extends Fragment {
         moreDetailsText.setVisibility(View.VISIBLE);
 
         combinedSRIcon = view.findViewById(R.id.combinedSRIcon);
+
+        addButton = view.findViewById(R.id.addButton);
 
         //Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -170,6 +184,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        settings = this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -303,6 +318,34 @@ public class SearchFragment extends Fragment {
                     levelText.setText(Integer.toString(level));
                     Picasso.get().load(getCompIcon(combinedSR)).into(combinedSRIcon);
 
+                    addButton.setVisibility(View.VISIBLE);
+                    boolean addCheck = true;
+                    ArrayList<Player> p = getArrayList("Players");
+                    if ((settings.getString("Username", "")).equals(username) && (settings.getString("Tag", "")).equals(tag)) {
+                        addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                        addCheck = false;
+                    } else if (p != null) {
+                        for (int j = 0; j < p.size(); j++) {
+                            if (((p.get(j)).getUsername()).equals(username) && ((p.get(j)).getTag()).equals(tag)) {
+                                addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                                addCheck = false;
+                                break;
+                            }
+                        }
+
+                    } if (addCheck) {
+                        addButton.setImageDrawable(getResources().getDrawable(R.drawable.add_ic));
+                        addButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Player p = new Player(username, tag, console);
+                                addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                                players.add(p);
+                                saveArrayList(players, "Players");
+                            }
+                        });
+                    }
+
                 } catch (JSONException e) {
                     // display quick play stats
                     statsCard.setVisibility(View.VISIBLE);
@@ -324,6 +367,8 @@ public class SearchFragment extends Fragment {
                     supportText.setVisibility(View.INVISIBLE);
                     combinedText.setVisibility(View.INVISIBLE);
                     combinedSRIcon.setVisibility(View.INVISIBLE);
+
+                    addButton.setVisibility(View.GONE);
 
                     if (stats.getBoolean("private")) {
                         cardGamesWon.setVisibility(View.INVISIBLE);
@@ -348,6 +393,24 @@ public class SearchFragment extends Fragment {
             }
         }
     }
+
+    public void saveArrayList(ArrayList<Player> players, String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(players);
+        editor.putString(key, json);
+        editor.apply();
+    }
+
+    public ArrayList<Player> getArrayList(String key){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<ArrayList<Player>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);

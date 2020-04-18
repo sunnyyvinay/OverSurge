@@ -25,4 +25,5 @@
     <string name="OWLDetails">Click to view more OWL details</string>
     <string name="OWLSchedule">View the OWL Schedule</string>
     <string name="OWLStanding">View the OWL Standings</string>
+    <string name="SavedPlayers">SAVED ACCOUNTS</string>
 </resources>

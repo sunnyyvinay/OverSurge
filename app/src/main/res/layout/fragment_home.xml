@@ -345,6 +345,25 @@
             </android.support.v7.widget.CardView>
 
             <TextView
+                android:id="@+id/savedPlayersText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="casual"
+                android:text="@string/SavedPlayers"
+                android:textColor="?attr/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/accountsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="4" />
+
+            <TextView
                 android:id="@+id/owlText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
