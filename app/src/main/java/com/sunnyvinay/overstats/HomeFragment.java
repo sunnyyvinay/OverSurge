@@ -10,15 +10,22 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -30,6 +37,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -100,6 +108,10 @@ public class HomeFragment extends Fragment {
     CardView owlDetailsCard;
 
     ImageView refreshButton;
+
+    RecyclerView accountsRecycler;
+    PlayerAdapter playerAdapter;
+    ArrayList<Player> players = new ArrayList<>();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -229,6 +241,28 @@ public class HomeFragment extends Fragment {
             new getAccount().execute(accountLink);
         }
 
+        players = getArrayList("Players");
+        //players.remove(0);
+        //saveArrayList(players, "Players");
+
+        accountsRecycler = view.findViewById(R.id.accountsRecycler);
+        accountsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        accountsRecycler.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
+        for (int p = 0; p < players.size(); p++) {
+            //(players.get(p)).updateProfile();
+            new UpdatePlayer(players.get(p)).execute(players.get(p).getLink());
+            Log.i("test", Integer.toString(players.get(p).getTank()));
+            //saveArrayList(players, "Players");
+        }
+        //saveArrayList(players, "Players");
+        //players = getArrayList("Players");
+
+        playerAdapter = new PlayerAdapter(getContext(), players);
+        //playerAdapter.setClickListener(this);
+        accountsRecycler.setAdapter(playerAdapter);
+        //playerAdapter.notifyDataSetChanged();
+
         new owNewsTask().execute();
 
         new getOWL().execute();
@@ -261,6 +295,7 @@ public class HomeFragment extends Fragment {
                 loadFragment(new HomeFragment());
             }
         });
+
     }
 
     @Override
@@ -647,6 +682,72 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private class UpdatePlayer extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                return Utility.downloadDataFromUrl(urls[0]);
+            } catch (IOException e) {
+                //Looper.prepare();
+                return "Unable to retrieve data. URL may be invalid.";
+            }
+        }
+
+        Player player;
+        protected UpdatePlayer(Player player)
+        {this.player = player;}
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                String responseBody = result;
+
+                JSONArray ratings;
+                JSONObject stats = new JSONObject(responseBody);
+
+                player.setIconURL(stats.getString("icon"));
+                //iconURL = stats.getString("icon");
+                String rawName = stats.getString("name");
+
+                int i = 0;
+                char c = rawName.charAt(i);
+                String name = "";
+                do {
+                    name = name + c;
+                    i++;
+                    c = rawName.charAt(i);
+                } while (c != '#');
+
+                ratings = stats.getJSONArray("ratings");
+
+                for (int j = 0; j < ratings.length(); j++) {
+                    JSONObject currentRole = ratings.getJSONObject(j);
+                    if (currentRole.getString("role").equals("tank")) {
+                        Log.i("Actual", Integer.toString(currentRole.getInt("level")));
+                        player.setTank(currentRole.getInt("level"));
+                        player.setTankURL(currentRole.getString("rankIcon"));
+                        //tank = currentRole.getInt("level");
+                        //tankURL = currentRole.getString("rankIcon");
+                    } else if (currentRole.getString("role").equals("damage")) {
+                        player.setDamage(currentRole.getInt("level"));
+                        player.setDamageURL(currentRole.getString("rankIcon"));
+                        //damage = currentRole.getInt("level");
+                        //damageURL = currentRole.getString("rankIcon");
+                    } else if (currentRole.getString("role").equals("support")) {
+                        player.setSupport(currentRole.getInt("level"));
+                        player.setSupportURL(currentRole.getString("rankIcon"));
+                        //support = currentRole.getInt("level");
+                        //supportURL = currentRole.getString("rankIcon");
+                    }
+                }
+                playerAdapter.notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private boolean loadFragment(Fragment fragment) {
         //switching fragment
         if (fragment != null) {
@@ -657,6 +758,22 @@ public class HomeFragment extends Fragment {
             return true;
         }
         return false;
+    }
+
+    public void saveArrayList(ArrayList<Player> players, String key){
+        SharedPreferences.Editor editor = settings.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(players);
+        editor.putString(key, json);
+        editor.apply();
+    }
+
+    public ArrayList<Player> getArrayList(String key){
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Gson gson = new Gson();
+        String json = settings.getString(key, null);
+        Type type = new TypeToken<ArrayList<Player>>() {}.getType();
+        return gson.fromJson(json, type);
     }
 
     public String getCompIcon(int rating) {

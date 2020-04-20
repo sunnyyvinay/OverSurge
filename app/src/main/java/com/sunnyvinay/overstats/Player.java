@@ -2,9 +2,6 @@ package com.sunnyvinay.overstats;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,21 +14,36 @@ public class Player {
     String tag;
     String console;
 
-    int tank = 0000;
-    int damage = 0000;
-    int support = 0000;
+    private int tank;
+    private int damage;
+    private int support;
 
-    String iconURL;
+    private String iconURL;
 
-    String link;
+    private String tankURL;
+    private String damageURL;
+    private String supportURL;
 
-    public Player(String username, String tag, String console) {
+    private String link;
+
+    public Player(String username, String tag, String console, int tank, int damage, int support, String iconURL, String tankURL,
+                  String damageURL, String supportURL) {
         this.username = username;
         this.tag = tag;
         this.console = console;
+        this.tank = tank;
+        this.damage = damage;
+        this.support = support;
+        this.iconURL = iconURL;
+        this.tankURL = tankURL;
+        this.damageURL = damageURL;
+        this.supportURL = supportURL;
         link = "https://ovrstat.com/stats/" + console + "/" + username + "-" + tag;
-        new getPlayer().execute(link);
+    }
 
+    public void updateProfile() {
+        //new UpdatePlayer(this).execute(link);
+        //Log.i("hi", Integer.toString(getTank()));
     }
 
     public String getUsername() {
@@ -42,56 +54,63 @@ public class Player {
         return tag;
     }
 
-    private class getPlayer extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                return Utility.downloadDataFromUrl(urls[0]);
-            } catch (IOException e) {
-                //Looper.prepare();
-                return "Unable to retrieve data. URL may be invalid.";
-            }
-        }
+    public int getTank() {
+        return tank;
+    }
 
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                String responseBody = result;
+    public int getDamage() {
+        return damage;
+    }
 
-                JSONArray ratings;
-                JSONObject stats = new JSONObject(responseBody);
+    public int getSupport() {
+        return support;
+    }
 
-                iconURL = stats.getString("icon");
-                String rawName = stats.getString("name");
+    public String getIconURL() {
+        return iconURL;
+    }
 
-                int i = 0;
-                char c = rawName.charAt(i);
-                String name = "";
-                do {
-                    name = name + c;
-                    i++;
-                    c = rawName.charAt(i);
-                } while (c != '#');
+    public void setTank(int tank) {
+        this.tank = tank;
+    }
 
-                ratings = stats.getJSONArray("ratings");
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 
-                for (int j = 0; j < ratings.length(); j++) {
-                    JSONObject currentRole = ratings.getJSONObject(j);
-                    if (currentRole.getString("role").equals("tank")) {
-                        tank = currentRole.getInt("level");
-                        //tankRankURL = currentRole.getString("rankIcon");
-                    } else if (currentRole.getString("role").equals("damage")) {
-                        damage = currentRole.getInt("level");
-                        //damageRankURL = currentRole.getString("rankIcon");
-                    } else if (currentRole.getString("role").equals("support")) {
-                        support = currentRole.getInt("level");
-                        //supportRankURL = currentRole.getString("rankIcon");
-                    }
-                }
-            } catch (JSONException e) {
-                Log.e("Error", "Account does not exist");
-                e.printStackTrace();
-            }
-        }
+    public void setSupport(int support) {
+        this.support = support;
+    }
+
+    public void setIconURL(String iconURL) {
+        this.iconURL = iconURL;
+    }
+
+    public String getTankURL() {
+        return tankURL;
+    }
+
+    public void setTankURL(String tankURL) {
+        this.tankURL = tankURL;
+    }
+
+    public String getDamageURL() {
+        return damageURL;
+    }
+
+    public void setDamageURL(String damageURL) {
+        this.damageURL = damageURL;
+    }
+
+    public String getSupportURL() {
+        return supportURL;
+    }
+
+    public void setSupportURL(String supportURL) {
+        this.supportURL = supportURL;
+    }
+
+    public String getLink() {
+        return link;
     }
 }

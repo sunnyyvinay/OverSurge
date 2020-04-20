@@ -65,10 +65,17 @@ public class SearchFragment extends Fragment {
     TextView moreDetailsText;
     ImageView combinedSRIcon;
 
-    private String console;
+    String console;
     private String link;
     String username;
     String tag;
+
+    int tankSR;
+    int damageSR;
+    int supportSR;
+    String tankRankURL;
+    String damageRankURL;
+    String supportRankURL;
 
     ImageView addButton;
     ArrayList<Player> players = new ArrayList<>();
@@ -110,6 +117,7 @@ public class SearchFragment extends Fragment {
         combinedSRIcon = view.findViewById(R.id.combinedSRIcon);
 
         addButton = view.findViewById(R.id.addButton);
+        players = getArrayList("Players");
 
         //Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
@@ -217,7 +225,7 @@ public class SearchFragment extends Fragment {
                 JSONArray ratings;
                 JSONObject stats = new JSONObject(responseBody);
 
-                String iconURL = stats.getString("icon");
+                final String iconURL = stats.getString("icon");
                 String rawName = stats.getString("name");
 
                 int i = 0;
@@ -235,12 +243,15 @@ public class SearchFragment extends Fragment {
 
                 try {
                     ratings = stats.getJSONArray("ratings");
-                    int tankSR = 0;
-                    String tankRankURL = "";
-                    int damageSR = 0;
-                    String damageRankURL = "";
-                    int supportSR = 0;
-                    String supportRankURL = "";
+                    tankSR = 0;
+                    tankRankURL = "";
+
+                    damageSR = 0;
+                    damageRankURL = "";
+
+                    supportSR = 0;
+                    supportRankURL = "";
+
                     int combinedSR = 0;
                     int numOfRoles = 0;
 
@@ -320,13 +331,13 @@ public class SearchFragment extends Fragment {
 
                     addButton.setVisibility(View.VISIBLE);
                     boolean addCheck = true;
-                    ArrayList<Player> p = getArrayList("Players");
+                    //ArrayList<Player> p = getArrayList("Players");
                     if ((settings.getString("Username", "")).equals(username) && (settings.getString("Tag", "")).equals(tag)) {
                         addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
                         addCheck = false;
-                    } else if (p != null) {
-                        for (int j = 0; j < p.size(); j++) {
-                            if (((p.get(j)).getUsername()).equals(username) && ((p.get(j)).getTag()).equals(tag)) {
+                    } else if (players != null) {
+                        for (int j = 0; j < players.size(); j++) {
+                            if (((players.get(j)).getUsername()).equals(username) && ((players.get(j)).getTag()).equals(tag)) {
                                 addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
                                 addCheck = false;
                                 break;
@@ -338,7 +349,7 @@ public class SearchFragment extends Fragment {
                         addButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Player p = new Player(username, tag, console);
+                                Player p = new Player(username, tag, console, tankSR, damageSR, supportSR, iconURL, tankRankURL, damageRankURL, supportRankURL);
                                 addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
                                 players.add(p);
                                 saveArrayList(players, "Players");
@@ -395,8 +406,8 @@ public class SearchFragment extends Fragment {
     }
 
     public void saveArrayList(ArrayList<Player> players, String key){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferences.Editor editor = prefs.edit();
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = settings.edit();
         Gson gson = new Gson();
         String json = gson.toJson(players);
         editor.putString(key, json);
@@ -404,9 +415,9 @@ public class SearchFragment extends Fragment {
     }
 
     public ArrayList<Player> getArrayList(String key){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Gson gson = new Gson();
-        String json = prefs.getString(key, null);
+        String json = settings.getString(key, null);
         Type type = new TypeToken<ArrayList<Player>>() {}.getType();
         return gson.fromJson(json, type);
     }
