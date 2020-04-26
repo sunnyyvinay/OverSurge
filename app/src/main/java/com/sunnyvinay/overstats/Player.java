@@ -1,18 +1,9 @@
 package com.sunnyvinay.overstats;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
 public class Player {
-    String username;
-    String tag;
-    String console;
+    private String username;
+    private String tag;
+    private String console;
 
     private int tank;
     private int damage;
@@ -26,24 +17,11 @@ public class Player {
 
     private String link;
 
-    public Player(String username, String tag, String console, int tank, int damage, int support, String iconURL, String tankURL,
-                  String damageURL, String supportURL) {
+    public Player(String username, String tag, String console) {
         this.username = username;
         this.tag = tag;
         this.console = console;
-        this.tank = tank;
-        this.damage = damage;
-        this.support = support;
-        this.iconURL = iconURL;
-        this.tankURL = tankURL;
-        this.damageURL = damageURL;
-        this.supportURL = supportURL;
         link = "https://ovrstat.com/stats/" + console + "/" + username + "-" + tag;
-    }
-
-    public void updateProfile() {
-        //new UpdatePlayer(this).execute(link);
-        //Log.i("hi", Integer.toString(getTank()));
     }
 
     public String getUsername() {
@@ -53,6 +31,8 @@ public class Player {
     public String getTag() {
         return tag;
     }
+
+    public String getConsole() { return console; }
 
     public int getTank() {
         return tank;
@@ -110,7 +90,5 @@ public class Player {
         this.supportURL = supportURL;
     }
 
-    public String getLink() {
-        return link;
-    }
+    public String getLink() { return link; }
 }

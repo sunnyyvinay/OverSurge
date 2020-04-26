@@ -54,7 +54,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.61" />
+                        app:layout_constraintVertical_bias="0.61"
+                        android:gravity="center_horizontal" />
 
                     <TextView
                         android:id="@+id/accountGamesWon"
@@ -208,7 +209,8 @@
                         app:layout_constraintStart_toEndOf="@+id/accountTankIcon"
                         app:layout_constraintTop_toBottomOf="@+id/accountTankSRIcon"
                         app:layout_constraintVertical_bias="0.36"
-                        tools:visibility="visible" />
+                        tools:visibility="visible"
+                        android:gravity="center_horizontal" />
 
                     <TextView
                         android:id="@+id/accountDamageSR"
@@ -222,7 +224,8 @@
                         app:layout_constraintStart_toEndOf="@+id/accountDamageIcon"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.911"
-                        tools:visibility="visible" />
+                        tools:visibility="visible"
+                        android:gravity="center_horizontal" />
 
                     <ImageView
                         android:id="@+id/accountSupportIcon"
@@ -359,15 +362,28 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbarAlwaysDrawVerticalTrack="true">
+                android:layout_height="wrap_content">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/accountsRecycler"
+                <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:itemCount="4" />
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/accountsRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        tools:itemCount="4" />
+                </android.support.v4.widget.NestedScrollView>
             </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/accountsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SavedAccountsText"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/owlText"

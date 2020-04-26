@@ -26,4 +26,5 @@
     <string name="OWLSchedule">View the OWL Schedule</string>
     <string name="OWLStanding">View the OWL Standings</string>
     <string name="SavedPlayers">SAVED ACCOUNTS</string>
+    <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details.)</string>
 </resources>

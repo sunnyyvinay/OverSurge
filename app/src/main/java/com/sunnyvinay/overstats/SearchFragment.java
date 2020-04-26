@@ -117,6 +117,7 @@ public class SearchFragment extends Fragment {
         combinedSRIcon = view.findViewById(R.id.combinedSRIcon);
 
         addButton = view.findViewById(R.id.addButton);
+
         players = getArrayList("Players");
 
         //Spinner
@@ -349,7 +350,7 @@ public class SearchFragment extends Fragment {
                         addButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Player p = new Player(username, tag, console, tankSR, damageSR, supportSR, iconURL, tankRankURL, damageRankURL, supportRankURL);
+                                Player p = new Player(username, tag, console);
                                 addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
                                 players.add(p);
                                 saveArrayList(players, "Players");
@@ -421,7 +422,6 @@ public class SearchFragment extends Fragment {
         Type type = new TypeToken<ArrayList<Player>>() {}.getType();
         return gson.fromJson(json, type);
     }
-
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
