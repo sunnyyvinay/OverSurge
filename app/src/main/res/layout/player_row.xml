@@ -34,7 +34,7 @@
         android:id="@+id/tankIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
         android:paddingTop="15dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
@@ -49,7 +49,7 @@
         android:id="@+id/damageIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
         android:paddingTop="15dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
@@ -64,7 +64,7 @@
         android:id="@+id/supportIcon"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.2"
         android:paddingTop="15dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
