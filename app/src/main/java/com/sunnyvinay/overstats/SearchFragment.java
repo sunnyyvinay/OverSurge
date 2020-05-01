@@ -380,17 +380,46 @@ public class SearchFragment extends Fragment {
                     combinedText.setVisibility(View.INVISIBLE);
                     combinedSRIcon.setVisibility(View.INVISIBLE);
 
-                    addButton.setVisibility(View.GONE);
+                    //addButton.setVisibility(View.GONE);
 
                     if (stats.getBoolean("private")) {
                         cardGamesWon.setVisibility(View.INVISIBLE);
                         quickPlayIcon.setVisibility(View.INVISIBLE);
                         privateProfileText.setVisibility(View.VISIBLE);
+                        addButton.setVisibility(View.INVISIBLE);
                     } else {
                         cardGamesWon.setVisibility(View.VISIBLE);
                         quickPlayIcon.setVisibility(View.VISIBLE);
 
                         cardGamesWon.setText(gamesWon + " games won");
+
+                        addButton.setVisibility(View.VISIBLE);
+                        boolean addCheck = true;
+                        //ArrayList<Player> p = getArrayList("Players");
+                        if ((settings.getString("Username", "")).equals(username) && (settings.getString("Tag", "")).equals(tag)) {
+                            addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                            addCheck = false;
+                        } else if (players != null) {
+                            for (int j = 0; j < players.size(); j++) {
+                                if (((players.get(j)).getUsername()).equals(username) && ((players.get(j)).getTag()).equals(tag)) {
+                                    addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                                    addCheck = false;
+                                    break;
+                                }
+                            }
+
+                        } if (addCheck) {
+                            addButton.setImageDrawable(getResources().getDrawable(R.drawable.add_ic));
+                            addButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Player p = new Player(username, tag, console);
+                                    addButton.setImageDrawable(getResources().getDrawable(R.drawable.check_ic));
+                                    players.add(p);
+                                    saveArrayList(players, "Players");
+                                }
+                            });
+                        }
                     }
 
                     e.printStackTrace();

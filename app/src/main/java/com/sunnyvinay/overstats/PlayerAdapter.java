@@ -3,23 +3,20 @@ package com.sunnyvinay.overstats;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> {
+public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> implements ItemMoveCallback.ItemTouchHelperContract {
 
     private ArrayList<Player> mData;
     private LayoutInflater mInflater;
@@ -50,29 +47,53 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
         Picasso.get().load(R.drawable.delete_ic).into(holder.playerDelete);
 
-        if (player.getTank() == 0) {
-            holder.tankSR.setText("0000");
-            holder.tankIcon.setVisibility(View.INVISIBLE);
+        holder.tankSR.setVisibility(View.VISIBLE);
+        holder.tankIcon.setVisibility(View.VISIBLE);
+        holder.damageSR.setVisibility(View.VISIBLE);
+        holder.damageIcon.setVisibility(View.VISIBLE);
+        holder.supportSR.setVisibility(View.VISIBLE);
+        holder.supportIcon.setVisibility(View.VISIBLE);
+
+        if (player.getUsername().length() >= 10) {
+            holder.name.setTextSize(15);
         } else {
-            Log.i("hi", "tank settings");
-            holder.tankSR.setText(Integer.toString(player.getTank()));
-            Picasso.get().load(player.getTankURL()).into(holder.tankIcon);
+            holder.name.setTextSize(18);
         }
 
-        if (player.getDamage() == 0) {
-            holder.damageSR.setText("0000");
+        if (player.getTank() == 0 && player.getDamage() == 0 && player.getSupport() == 0) {
+            // quick play account
+            Picasso.get().load(R.drawable.quickplaybolt).into(holder.tankIcon);
+            holder.tankSR.setText(player.getGamesWon() + " games won");
+
             holder.damageIcon.setVisibility(View.INVISIBLE);
-        } else {
-            holder.damageSR.setText(Integer.toString(player.getDamage()));
-            Picasso.get().load(player.getDamageURL()).into(holder.damageIcon);
-        }
+            holder.damageSR.setVisibility(View.GONE);
+            holder.supportSR.setVisibility(View.GONE);
+            holder.supportIcon.setVisibility(View.GONE);
 
-        if (player.getSupport() == 0) {
-            holder.supportSR.setText("0000");
-            holder.supportIcon.setVisibility(View.INVISIBLE);
         } else {
-            holder.supportSR.setText(Integer.toString(player.getSupport()));
-            Picasso.get().load(player.getSupportURL()).into(holder.supportIcon);
+            if (player.getTank() == 0) {
+                holder.tankSR.setText("0000");
+                holder.tankIcon.setVisibility(View.INVISIBLE);
+            } else {
+                holder.tankSR.setText(Integer.toString(player.getTank()));
+                Picasso.get().load(player.getTankURL()).into(holder.tankIcon);
+            }
+
+            if (player.getDamage() == 0) {
+                holder.damageSR.setText("0000");
+                holder.damageIcon.setVisibility(View.INVISIBLE);
+            } else {
+                holder.damageSR.setText(Integer.toString(player.getDamage()));
+                Picasso.get().load(player.getDamageURL()).into(holder.damageIcon);
+            }
+
+            if (player.getSupport() == 0) {
+                holder.supportSR.setText("0000");
+                holder.supportIcon.setVisibility(View.INVISIBLE);
+            } else {
+                holder.supportSR.setText(Integer.toString(player.getSupport()));
+                Picasso.get().load(player.getSupportURL()).into(holder.supportIcon);
+            }
         }
     }
 
@@ -80,6 +101,38 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(mData, i, i + 1);
+                saveArrayList(mData, "Players");
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(mData, i, i - 1);
+                saveArrayList(mData, "Players");
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onRowSelected(ViewHolder myViewHolder) {
+        myViewHolder.itemView.setBackgroundColor(Color.GRAY);
+    }
+
+    @Override
+    public void onRowClear(ViewHolder myViewHolder) {
+        TypedValue a = new TypedValue();
+        int color = 0;
+        context.getTheme().resolveAttribute(android.R.attr.actionBarItemBackground, a, true);
+        if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+            color = a.data;
+        }
+        myViewHolder.itemView.setBackgroundColor(color);
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -133,11 +186,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         //notifyItemRangeChanged(position, mData.size());
     }
 
-
     // convenience method for getting data at click position
-    Player getItem(int id) {
-        return mData.get(id);
-    }
+    Player getItem(int id) { return mData.get(id); }
 
     public void saveArrayList(ArrayList<Player> players, String key){
         SharedPreferences.Editor editor = settings.edit();

@@ -17,6 +17,8 @@ public class Player {
 
     private String link;
 
+    private int gamesWon;
+
     public Player(String username, String tag, String console) {
         this.username = username;
         this.tag = tag;
@@ -91,4 +93,8 @@ public class Player {
     }
 
     public String getLink() { return link; }
+
+    public int getGamesWon() { return gamesWon; }
+
+    public void setGamesWon(int gamesWon) { this.gamesWon = gamesWon; }
 }

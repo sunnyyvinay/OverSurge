@@ -9,21 +9,16 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Looper;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -257,13 +252,18 @@ public class HomeFragment extends Fragment {
         accountsRecycler.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
 
+        playerAdapter = new PlayerAdapter(getContext(), players);
+
         if (players.size() != 0) {
             for (int p = 0; p < players.size(); p++) {
                 new UpdatePlayer(players.get(p)).execute(players.get(p).getLink());
             }
-            playerAdapter = new PlayerAdapter(getContext(), players);
             accountsRecycler.setAdapter(playerAdapter);
         }
+
+        ItemTouchHelper.Callback callback = new ItemMoveCallback(playerAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(accountsRecycler);
 
         new owNewsTask().execute();
 
@@ -709,6 +709,7 @@ public class HomeFragment extends Fragment {
                 JSONObject stats = new JSONObject(responseBody);
 
                 player.setIconURL(stats.getString("icon"));
+                player.setGamesWon(stats.getInt("gamesWon"));
 
                 ratings = stats.getJSONArray("ratings");
 
