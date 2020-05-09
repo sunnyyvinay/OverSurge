@@ -27,4 +27,5 @@
     <string name="OWLStanding">View the OWL Standings</string>
     <string name="SavedPlayers">SAVED ACCOUNTS</string>
     <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details. Drag and drop to organize list.)</string>
+    <string name="Teams">TEAMS</string>
 </resources>

@@ -16,6 +16,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class HomeFragment extends Fragment {
     ImageView newsImage4;
     TextView newsTitle4;
 
+    CardView accountCard;
     CircleImageView accountIcon;
     TextView accountLevel;
     TextView accountUsername;
@@ -132,6 +135,7 @@ public class HomeFragment extends Fragment {
         newsImage4 = view.findViewById(R.id.newsImage4);
         newsTitle4 = view.findViewById(R.id.newsTitle4);
 
+        accountCard = view.findViewById(R.id.accountCard);
         accountIcon = view.findViewById(R.id.accountIcon);
         accountLevel = view.findViewById(R.id.accountLevel);
         accountUsername = view.findViewById(R.id.accountUsername);
@@ -439,16 +443,17 @@ public class HomeFragment extends Fragment {
 
                 int gamesWon = stats.getInt("gamesWon");
 
+                int tankSR = 0;
+                String tankRankURL = "";
+                int damageSR = 0;
+                String damageRankURL = "";
+                int supportSR = 0;
+                String supportRankURL = "";
+                int combinedSR = 0;
+                int numOfRoles = 0;
+
                 try {
                     ratings = stats.getJSONArray("ratings");
-                    int tankSR = 0;
-                    String tankRankURL = "";
-                    int damageSR = 0;
-                    String damageRankURL = "";
-                    int supportSR = 0;
-                    String supportRankURL = "";
-                    int combinedSR = 0;
-                    int numOfRoles = 0;
 
                     for (int j = 0; j < ratings.length(); j++) {
                         JSONObject currentRole = ratings.getJSONObject(j);
@@ -703,30 +708,37 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             try {
-                String responseBody = result;
-
                 JSONArray ratings;
-                JSONObject stats = new JSONObject(responseBody);
+                JSONObject stats = new JSONObject(result);
 
                 player.setIconURL(stats.getString("icon"));
                 player.setGamesWon(stats.getInt("gamesWon"));
+
+                player.setTank(0);
+                player.setDamage(0);
+                player.setSupport(0);
 
                 ratings = stats.getJSONArray("ratings");
 
                 for (int j = 0; j < ratings.length(); j++) {
                     JSONObject currentRole = ratings.getJSONObject(j);
-                    if (currentRole.getString("role").equals("tank")) {
-                        player.setTank(currentRole.getInt("level"));
-                        player.setTankURL(currentRole.getString("rankIcon"));
-                    } else if (currentRole.getString("role").equals("damage")) {
-                        player.setDamage(currentRole.getInt("level"));
-                        player.setDamageURL(currentRole.getString("rankIcon"));
-                    } else if (currentRole.getString("role").equals("support")) {
-                        player.setSupport(currentRole.getInt("level"));
-                        player.setSupportURL(currentRole.getString("rankIcon"));
+                    switch (currentRole.getString("role")) {
+                        case "tank":
+                            player.setTank(currentRole.getInt("level"));
+                            player.setTankURL(currentRole.getString("rankIcon"));
+                            break;
+                        case "damage":
+                            player.setDamage(currentRole.getInt("level"));
+                            player.setDamageURL(currentRole.getString("rankIcon"));
+                            break;
+                        case "support":
+                            player.setSupport(currentRole.getInt("level"));
+                            player.setSupportURL(currentRole.getString("rankIcon"));
+                            break;
                     }
                 }
             } catch (JSONException e) {
+                // "ratings" is null
                 e.printStackTrace();
             }
             playerAdapter.notifyItemChanged(players.indexOf(player));
