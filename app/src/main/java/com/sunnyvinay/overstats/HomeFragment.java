@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment {
     boolean showScores;
 
     CardView owlDetailsCard;
+    ImageView owlDetailsArrow;
 
     ImageView refreshButton;
 
@@ -178,17 +179,30 @@ public class HomeFragment extends Fragment {
         hideScoresOption = view.findViewById(R.id.hideScoreOptions);
 
         owlDetailsCard = view.findViewById(R.id.owlDetailsCard);
+        owlDetailsArrow = view.findViewById(R.id.owlDetailsArrow);
 
         refreshButton = view.findViewById(R.id.refreshButton);
 
         if (settings.getBoolean("Theme", true)) {
+            // Refresh button
             int imageResource = getResources().getIdentifier("@drawable/refresh_white", null, "com.sunnyvinay.overstats");
             Drawable res = getResources().getDrawable(imageResource);
             refreshButton.setImageDrawable(res);
+
+            // OWL details arrow
+            int imageResource2 = getResources().getIdentifier("@drawable/rightarrow_white", null, "com.sunnyvinay.overstats");
+            Drawable res2 = getResources().getDrawable(imageResource2);
+            owlDetailsArrow.setImageDrawable(res2);
         } else {
+            // Refresh button
             int imageResource = getResources().getIdentifier("@drawable/refresh_black", null, "com.sunnyvinay.overstats");
             Drawable res = getResources().getDrawable(imageResource);
             refreshButton.setImageDrawable(res);
+
+            // OWL details arrow
+            int imageResource2 = getResources().getIdentifier("@drawable/rightarrow_black", null, "com.sunnyvinay.overstats");
+            Drawable res2 = getResources().getDrawable(imageResource2);
+            owlDetailsArrow.setImageDrawable(res2);
         }
 
         internetCheck = new AlertDialog.Builder(this.getActivity()).create();

@@ -161,20 +161,42 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
             playerDelete.setOnClickListener(this);
             icon.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
+            Player player = mData.get(getAdapterPosition());
             if (view.equals(playerDelete)) {
                 removeAt(getAdapterPosition());
             } else if (view.equals(icon)) {
-                Player player = mData.get(getAdapterPosition());
                 Intent intent = new Intent(context, PlayerActivity.class);
                 intent.putExtra("CONSOLE", player.getConsole());
                 intent.putExtra("USERNAME", player.getUsername());
                 intent.putExtra("BATTLE_TAG", player.getTag());
                 intent.putExtra("Fragment", "");
                 context.startActivity(intent);
+            } else {
+                if (player.getTank() != 0 || player.getDamage() != 0 || player.getSupport() != 0) {
+                    if (tankSR.getVisibility() == View.VISIBLE) {
+                        int numOfRoles = (player.getTank() == 0 ? 0 : 1) + (player.getDamage() == 0 ? 0 : 1) + (player.getSupport() == 0 ? 0 : 1);
+                        int combinedSR = (player.getTank() + player.getDamage() + player.getSupport()) / numOfRoles;
+
+                        tankIcon.setVisibility(View.INVISIBLE);
+                        tankSR.setVisibility(View.INVISIBLE);
+                        supportSR.setVisibility(View.INVISIBLE);
+                        supportIcon.setVisibility(View.INVISIBLE);
+                        damageSR.setText(Integer.toString(combinedSR));
+                        Picasso.get().load(getCompIcon(combinedSR)).into(damageIcon);
+                    } else {
+                        tankIcon.setVisibility(View.VISIBLE);
+                        tankSR.setVisibility(View.VISIBLE);
+                        supportSR.setVisibility(View.VISIBLE);
+                        supportIcon.setVisibility(View.VISIBLE);
+                        damageSR.setText(Integer.toString(player.getDamage()));
+                        Picasso.get().load(player.getDamageURL()).into(damageIcon);
+                    }
+                }
             }
         }
     }
@@ -195,5 +217,30 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         String json = gson.toJson(players);
         editor.putString(key, json);
         editor.apply();
+    }
+
+    public String getCompIcon(int rating) {
+        if (rating >= 1 && rating <= 1499) {
+            //bronze
+            return "https://vignette.wikia.nocookie.net/overwatch/images/8/8f/Competitive_Bronze_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023401";
+        } else if (rating >= 1500 && rating <= 1999) {
+            //silver
+            return "https://vignette.wikia.nocookie.net/overwatch/images/f/fe/Competitive_Silver_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023740";
+        } else if (rating >= 2000 && rating <= 2499) {
+            //gold
+            return "https://vignette.wikia.nocookie.net/overwatch/images/4/44/Competitive_Gold_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023755";
+        } else if (rating >= 2500 && rating <= 2999) {
+            //plat
+            return "https://vignette.wikia.nocookie.net/overwatch/images/e/e4/Competitive_Platinum_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023807";
+        } else if (rating >= 3000 && rating <= 3499) {
+            //diamond
+            return "https://vignette.wikia.nocookie.net/overwatch/images/3/3f/Competitive_Diamond_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023818";
+        } else if (rating >= 3500 && rating <= 3999) {
+            //masters
+            return "https://vignette.wikia.nocookie.net/overwatch/images/5/50/Competitive_Master_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023832";
+        } else {
+            //gm
+            return "https://vignette.wikia.nocookie.net/overwatch/images/c/cc/Competitive_Grandmaster_Icon.png/revision/latest/scale-to-width-down/75?cb=20161122023845";
+        }
     }
 }

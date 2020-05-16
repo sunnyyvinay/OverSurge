@@ -22,10 +22,11 @@
     <string name="NoMatchData">No match data is currently available</string>
     <string name="ScoreConfig">Hide/Show match scores in "Settings"</string>
     <string name="UpcomingMatch">This match has not started</string>
-    <string name="OWLDetails">Click to view more OWL details</string>
+    <string name="OWLDetails">View more about OWL</string>
     <string name="OWLSchedule">View the OWL Schedule</string>
     <string name="OWLStanding">View the OWL Standings</string>
     <string name="SavedPlayers">SAVED ACCOUNTS</string>
-    <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details. Drag and drop to organize list.)</string>
+    <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details. Drag and drop to organize list. Click on a player to view their
+        combined SR.)</string>
     <string name="Teams">TEAMS</string>
 </resources>
