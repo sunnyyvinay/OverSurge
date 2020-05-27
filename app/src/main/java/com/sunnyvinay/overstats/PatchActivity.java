@@ -1,13 +1,13 @@
 package com.sunnyvinay.overstats;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class PatchActivity extends AppCompatActivity {
     WebView patchBrowser;
@@ -34,7 +34,14 @@ public class PatchActivity extends AppCompatActivity {
         patchBar.setDisplayHomeAsUpEnabled(true);
         patchBar.setTitle("Patch Notes");
 
-        patchBrowser.loadUrl("https://playoverwatch.com/en-us/news/patch-notes/pc");
+        patchBrowser.setWebViewClient(new WebViewClient());
+        patchBrowser.getSettings().setJavaScriptEnabled(true);
+        patchBrowser.getSettings().setAllowFileAccessFromFileURLs(false);
+        patchBrowser.getSettings().setAllowUniversalAccessFromFileURLs(false);
+        patchBrowser.getSettings().setDomStorageEnabled(true);
+        patchBrowser.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+
+        patchBrowser.loadUrl("https://playoverwatch.com/en-us/news/patch-notes/live");
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

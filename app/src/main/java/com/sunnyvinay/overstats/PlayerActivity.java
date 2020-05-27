@@ -2,8 +2,8 @@ package com.sunnyvinay.overstats;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -41,6 +41,8 @@ public class PlayerActivity extends AppCompatActivity {
 
         playerBrowser.setWebViewClient(new WebViewClient());
         playerBrowser.getSettings().setJavaScriptEnabled(true);
+        playerBrowser.getSettings().setAllowFileAccessFromFileURLs(false);
+        playerBrowser.getSettings().setAllowUniversalAccessFromFileURLs(false);
         playerBrowser.getSettings().setDomStorageEnabled(true);
         playerBrowser.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
 

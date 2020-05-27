@@ -9,15 +9,13 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,83 +41,84 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment extends Fragment {
-    CardView news1;
-    ImageView newsImage1;
-    TextView newsTitle1;
+    private CardView news1;
+    private ImageView newsImage1;
+    private TextView newsTitle1;
 
-    CardView news2;
-    ImageView newsImage2;
-    TextView newsTitle2;
+    private CardView news2;
+    private ImageView newsImage2;
+    private TextView newsTitle2;
 
-    CardView news3;
-    ImageView newsImage3;
-    TextView newsTitle3;
+    private CardView news3;
+    private ImageView newsImage3;
+    private TextView newsTitle3;
 
-    CardView news4;
-    ImageView newsImage4;
-    TextView newsTitle4;
+    private CardView news4;
+    private ImageView newsImage4;
+    private TextView newsTitle4;
 
-    CardView accountCard;
-    CircleImageView accountIcon;
-    TextView accountLevel;
-    TextView accountUsername;
-    ImageView accountTankIcon;
-    ImageView accountDamageIcon;
-    ImageView accountSupportIcon;
-    ImageView accountTankSRIcon;
-    ImageView accountDamageSRIcon;
-    ImageView accountSupportSRIcon;
-    TextView accountTankSR;
-    TextView accountDamageSR;
-    TextView accountSupportSR;
-    TextView accountGamesWon;
+    private CircleImageView accountIcon;
+    private TextView accountLevel;
+    private TextView accountUsername;
+    private ImageView accountTankIcon;
+    private ImageView accountDamageIcon;
+    private ImageView accountSupportIcon;
+    private ImageView accountTankSRIcon;
+    private ImageView accountDamageSRIcon;
+    private ImageView accountSupportSRIcon;
+    private TextView accountTankSR;
+    private TextView accountDamageSR;
+    private TextView accountSupportSR;
+    private TextView accountGamesWon;
 
-    String accountLink;
-    SharedPreferences settings;
-    String accountName;
-    String accountTag;
-    String accountPlatform;
-    TextView accountProblem;
+    private String accountLink;
+    private SharedPreferences settings;
+    private String accountName;
+    private String accountTag;
+    private String accountPlatform;
+    private TextView accountProblem;
 
-    AlertDialog internetCheck;
+    private AlertDialog internetCheck;
 
-    CardView playerDetailsCard;
+    private CardView playerDetailsCard;
 
-    ImageView accountCombinedIcon;
-    TextView accountCombinedSR;
-    CardView combinedCard;
+    private ImageView accountCombinedIcon;
+    private TextView accountCombinedSR;
+    private CardView combinedCard;
 
-    CardView patchCard;
-    TextView patchTitle;
+    private CardView patchCard;
+    private TextView patchTitle;
+    private TextView patchPTRTitle;
 
-    ConstraintLayout matchLayout;
-    ConstraintLayout noMatchLayout;
-    ImageView liveIcon;
-    ImageView awayTeamIcon;
-    TextView awayScore;
-    TextView matchText;
-    TextView homeScore;
-    ImageView homeTeamIcon;
-    TextView awayTeam;
-    TextView homeTeam;
-    TextView hideScoresOption;
+    private ConstraintLayout matchLayout;
+    private ConstraintLayout noMatchLayout;
+    private ImageView liveIcon;
+    private ImageView awayTeamIcon;
+    private TextView awayScore;
+    private TextView matchText;
+    private TextView homeScore;
+    private ImageView homeTeamIcon;
+    private TextView awayTeam;
+    private TextView homeTeam;
+    private TextView hideScoresOption;
 
-    boolean showScores;
+    private boolean showScores;
 
-    CardView owlDetailsCard;
-    ImageView owlDetailsArrow;
+    private CardView owlDetailsCard;
+    private ImageView owlDetailsArrow;
 
-    ImageView refreshButton;
+    private ImageView refreshButton;
 
-    RecyclerView accountsRecycler;
-    PlayerAdapter playerAdapter;
-    ArrayList<Player> players = new ArrayList<>();
-    TextView savedPlayersText;
+    private RecyclerView accountsRecycler;
+    private PlayerAdapter playerAdapter;
+    private ArrayList<Player> players = new ArrayList<>();
+    private TextView savedPlayersText;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // News
         news1 = view.findViewById(R.id.news1);
         newsImage1 = view.findViewById(R.id.newsImage1);
         newsTitle1 = view.findViewById(R.id.newsTitle1);
@@ -136,7 +135,7 @@ public class HomeFragment extends Fragment {
         newsImage4 = view.findViewById(R.id.newsImage4);
         newsTitle4 = view.findViewById(R.id.newsTitle4);
 
-        accountCard = view.findViewById(R.id.accountCard);
+        // Saved account
         accountIcon = view.findViewById(R.id.accountIcon);
         accountLevel = view.findViewById(R.id.accountLevel);
         accountUsername = view.findViewById(R.id.accountUsername);
@@ -164,6 +163,7 @@ public class HomeFragment extends Fragment {
         // Patch notes
         patchCard = view.findViewById(R.id.patchCard);
         patchTitle = view.findViewById(R.id.patchTitle);
+        patchPTRTitle = view.findViewById(R.id.patchPTRTitle);
 
         // OWLActivity
         matchLayout = view.findViewById(R.id.matchLayout);
@@ -347,13 +347,21 @@ public class HomeFragment extends Fragment {
                 }
                 for (Element image : images) {
                     String backImg = image.attr("style");
-                    String preimageURL = backImg.replaceAll("background-image: url\\(", "https:");
-                    String imageURL = preimageURL.replaceAll("\\)", "");
+                    String imageURL;
+                    if (!(backImg.startsWith("https:", 22))) {
+                        String preImageURL = backImg.replaceAll("background-image: url\\(", "https:");
+                        imageURL = preImageURL.replaceAll("\\)", "");
+                    } else {
+                        imageURL = backImg.replaceAll("background-image: url\\(", "");
+                        imageURL = imageURL.replaceAll("\\)", "");
+                    }
                     imageList.add(imageURL);
                 }
                 for (Element baseLink : links) {
                     String link = baseLink.attr("href");
-                    link = "https://playoverwatch.com/en-us" + link;
+                    if (!link.startsWith("https:")) {
+                        link = "https://playoverwatch.com/en-us" + link;
+                    }
                     linkList.add(link);
                 }
             } catch (IOException e) {
@@ -590,29 +598,31 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private class getPatchNotes extends AsyncTask<Void, Void, String> {
+    private class getPatchNotes extends AsyncTask<Void, Void, String[]> {
         @Override
-        protected String doInBackground(Void... params) {
+        protected String[] doInBackground(Void... params) {
             Document titleDoc;
+            Document ptrTitleDoc;
             String patchTitle = "Latest Patch Notes";
+            String ptrPatchTitle = "Latest PTR Patch Notes";
             try {
                 titleDoc = Jsoup.connect("https://blizztrack.com/overwatch/retail").get();
+                ptrTitleDoc = Jsoup.connect("https://blizztrack.com/overwatch/ptr").get();
 
-                //Elements titles = titleDoc.select("a[data-media-title]");
                 Elements titles = titleDoc.select("h2");
-
-                for (Element title : titles) {
-                    patchTitle = title.text();
-                }
+                Elements ptrTitles = ptrTitleDoc.select("h2");
+                for (Element title : titles) patchTitle = title.text();
+                for (Element title : ptrTitles) ptrPatchTitle = title.text();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return patchTitle;
+            return new String[]{patchTitle, ptrPatchTitle};
         }
 
         @Override
-        protected void onPostExecute(String result) {
-            patchTitle.setText(result);
+        protected void onPostExecute(String[] result) {
+            patchTitle.setText(result[0]);
+            patchPTRTitle.setText(result[1]);
 
             patchCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -621,7 +631,6 @@ public class HomeFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            //playerAdapter.notifyDataSetChanged();
         }
     }
 
@@ -691,7 +700,7 @@ public class HomeFragment extends Fragment {
                         liveIcon.setVisibility(View.INVISIBLE);
                         awayScore.setVisibility(View.INVISIBLE);
                         homeScore.setVisibility(View.INVISIBLE);
-                        matchText.setText("VS");
+                        matchText.setText(R.string.VS);
                         hideScoresOption.setText(R.string.UpcomingMatch);
                     }
                 }

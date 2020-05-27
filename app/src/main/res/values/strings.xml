@@ -29,4 +29,5 @@
     <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details. Drag and drop to organize list. Click on a player to view their
         combined SR.)</string>
     <string name="Teams">TEAMS</string>
+    <string name="VS">VS</string>
 </resources>
