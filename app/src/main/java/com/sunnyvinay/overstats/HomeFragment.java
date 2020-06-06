@@ -267,8 +267,7 @@ public class HomeFragment extends Fragment {
 
         accountsRecycler = view.findViewById(R.id.accountsRecycler);
         accountsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        accountsRecycler.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+        accountsRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         playerAdapter = new PlayerAdapter(getContext(), players);
 

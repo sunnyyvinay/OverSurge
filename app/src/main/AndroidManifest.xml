@@ -14,6 +14,7 @@
         android:theme="@style/Shock"
         android:versionCode="12"
         android:versionName="1.5.1">
+        <activity android:name=".TeamActivity"></activity>
         <activity android:name=".LeagueDisplayActivity" />
         <activity android:name=".OWLActivity" />
         <activity android:name=".PatchActivity" />

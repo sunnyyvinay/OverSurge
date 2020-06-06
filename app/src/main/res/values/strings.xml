@@ -30,4 +30,12 @@
         combined SR.)</string>
     <string name="Teams">TEAMS</string>
     <string name="VS">VS</string>
+    <string name="TeamLogo">Team Logo</string>
+    <string name="ColorsText">COLORS:</string>
+    <string name="Color1">Primary Color</string>
+    <string name="Color2">Secondary Color</string>
+    <string name="Color3">Tertiary Color</string>
+    <string name="Location">LOCATION:</string>
+    <string name="Roster">ROSTER</string>
+    <string name="Headshot">Player headshot</string>
 </resources>
