@@ -23,6 +23,13 @@
                 android:contentDescription="@string/TeamLogo"
                 app:srcCompat="@android:drawable/btn_dialog" />
 
+            <Button
+                android:id="@+id/websiteButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/OWLWebsite" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,36 +41,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
                     android:fontFamily="casual"
                     android:text="@string/ColorsText"
                     android:textColor="?attr/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <ImageView
+                <View
                     android:id="@+id/color1"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/Color1"
-                    app:srcCompat="@android:drawable/btn_dialog" />
+                    android:contentDescription="@string/Color1" />
 
-                <ImageView
+                <View
                     android:id="@+id/color2"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/Color2"
-                    app:srcCompat="@android:drawable/btn_dialog" />
+                    android:contentDescription="@string/Color2"/>
 
-                <ImageView
+                <View
                     android:id="@+id/color3"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:contentDescription="@string/Color3"
-                    app:srcCompat="@android:drawable/btn_dialog" />
+                    android:contentDescription="@string/Color3" />
 
             </LinearLayout>
 
@@ -78,7 +83,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="5dp"
-                    android:layout_marginLeft="5dp"
                     android:fontFamily="casual"
                     android:text="@string/Location"
                     android:textColor="?attr/colorAccent"
@@ -90,7 +94,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="15dp"
-                    android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:fontFamily="serif"
                     android:text="Dallas, TX"
@@ -102,7 +105,7 @@
                 android:id="@+id/rosterTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="casual"
                 android:text="@string/Roster"
@@ -124,4 +127,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

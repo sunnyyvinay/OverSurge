@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,9 +16,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.squareup.picasso.Picasso;
@@ -36,33 +35,20 @@ public class TeamActivity extends AppCompatActivity {
     SharedPreferences settings;
 
     ImageView teamLogo;
-    ImageView color1;
-    ImageView color2;
-    ImageView color3;
+    View color1;
+    View color2;
+    View color3;
     TextView location;
     RecyclerView rosterRecycler;
+    Button websiteButton;
 
     String team;
     int teamNum;
+    String website;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team);
-
-        teamLogo = findViewById(R.id.teamLogo);
-        color1 = findViewById(R.id.color1);
-        color2 = findViewById(R.id.color2);
-        color3 = findViewById(R.id.color3);
-        location = findViewById(R.id.location);
-        rosterRecycler = findViewById(R.id.rosterRecycler);
-
-        team = getIntent().getStringExtra("Team");
-        teamNum = getIntent().getIntExtra("TeamNum", 0);
-
-        bar = getSupportActionBar();
-        bar.setDisplayHomeAsUpEnabled(true);
-        bar.setTitle(team);
 
         settings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
@@ -71,6 +57,23 @@ public class TeamActivity extends AppCompatActivity {
         } else {
             this.setTheme(R.style.Shocklight);
         }
+
+        setContentView(R.layout.activity_team);
+
+        teamLogo = findViewById(R.id.teamLogo);
+        color1 = findViewById(R.id.color1);
+        color2 = findViewById(R.id.color2);
+        color3 = findViewById(R.id.color3);
+        location = findViewById(R.id.location);
+        rosterRecycler = findViewById(R.id.rosterRecycler);
+        websiteButton = findViewById(R.id.websiteButton);
+
+        team = getIntent().getStringExtra("Team");
+        teamNum = getIntent().getIntExtra("TeamNum", 0);
+
+        bar = getSupportActionBar();
+        bar.setDisplayHomeAsUpEnabled(true);
+        bar.setTitle(team);
 
         new UpdateTeam().execute("https://api.overwatchleague.com/v2/teams");
     }
@@ -93,12 +96,25 @@ public class TeamActivity extends AppCompatActivity {
                 JSONArray jsonTeams = teamsObject.getJSONArray("data");
                 JSONObject jsonTeam = jsonTeams.getJSONObject(teamNum);
 
-                String teamLogoURL = jsonTeam.getJSONObject("logo").getJSONObject("mainName").getString("png");
-                GlideToVectorYou.justLoadImage(TeamActivity.this, Uri.parse(teamLogoURL), teamLogo);
+                website = jsonTeam.getString("website") + "/en-us";
 
-                color1.setColorFilter(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("primary").getString("color")));
-                color2.setColorFilter(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("secondary").getString("color")));
-                color3.setColorFilter(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("tertiary").getString("color")));
+                websiteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+                        startActivity(browserIntent);
+                    }
+                });
+
+                String teamLogoURL = jsonTeam.getJSONObject("logo").getJSONObject("mainName").getString("png");
+                if (teamLogoURL.endsWith("png")) Picasso.get().load(teamLogoURL).into(teamLogo);
+                else GlideToVectorYou.justLoadImage(TeamActivity.this, Uri.parse(teamLogoURL), teamLogo);
+
+                color1.setBackgroundColor(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("primary").getString("color")));
+                color2.setBackgroundColor(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("secondary").getString("color")));
+                color3.setBackgroundColor(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("tertiary").getString("color")));
+
+                websiteButton.setBackgroundColor(Color.parseColor(jsonTeam.getJSONObject("colors").getJSONObject("secondary").getString("color")));
 
                 location.setText(jsonTeam.getString("location"));
 

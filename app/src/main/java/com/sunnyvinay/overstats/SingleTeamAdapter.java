@@ -1,21 +1,18 @@
 package com.sunnyvinay.overstats;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.ViewHolder> {
@@ -25,7 +22,7 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
     private LayoutInflater mInflater;
     private final Context context;
 
-    public SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> headshots, ArrayList<String> roles) {
+    SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> headshots, ArrayList<String> roles) {
         this.mInflater = LayoutInflater.from(context);
         this.names = names;
         this.headshots = headshots;

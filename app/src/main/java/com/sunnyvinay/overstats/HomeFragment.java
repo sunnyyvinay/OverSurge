@@ -724,8 +724,7 @@ public class HomeFragment extends Fragment {
         }
 
         Player player;
-        protected UpdatePlayer(Player player)
-        {this.player = player;}
+        protected UpdatePlayer(Player player) {this.player = player;}
 
         @Override
         protected void onPostExecute(String result) {
