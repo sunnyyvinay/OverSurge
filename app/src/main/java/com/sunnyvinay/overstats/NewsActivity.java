@@ -35,13 +35,14 @@ public class NewsActivity extends AppCompatActivity {
         newsBar.setTitle("News");
 
         String newsLink = getIntent().getStringExtra("NEWS_LINK");
-
+        newsBrowser.getSettings().setJavaScriptEnabled(true);
         newsBrowser.loadUrl(newsLink);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivityForResult(myIntent, 0);
+        //Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        //startActivityForResult(myIntent, 0);
+        finish();
         return true;
     }
 }

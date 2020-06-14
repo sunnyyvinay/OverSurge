@@ -15,9 +15,9 @@
     <string name="AccountNotSet">Your Blizzard account has not been entered. Go to "Settings" and enter your username and tag"</string>
     <string name="AccountPrivateProfile">Your account is private. For your stats to show, switch to public profile.</string>
     <string name="AccountNotExist">The Blizzard account that you entered does not exist. Please fix it in "Settings" or check your internet connection</string>
-    <string name="PlayerDetails">Click to view more details</string>
+    <string name="PlayerDetails">Tap to view more details</string>
     <string name="LatestPatchNotes">LATEST PATCH NOTES</string>
-    <string name="PatchDetails">Click to view patch notes</string>
+    <string name="PatchDetails">Tap to view patch notes</string>
     <string name="OverwatchLeague">OVERWATCH LEAGUE</string>
     <string name="NoMatchData">No match data is currently available</string>
     <string name="ScoreConfig">Hide/Show match scores in "Settings"</string>
@@ -26,7 +26,7 @@
     <string name="OWLSchedule">View the OWL Schedule</string>
     <string name="OWLStanding">View the OWL Standings</string>
     <string name="SavedPlayers">SAVED ACCOUNTS</string>
-    <string name="SavedAccountsText">(Your saved accounts will appear here. Click on a player icon to view their details. Drag and drop to organize list. Click on a player to view their
+    <string name="SavedAccountsText">(Your saved accounts will appear here. Tap on a player icon to view their details. Drag and drop to organize list. Tap on a player to view their
         combined SR.)</string>
     <string name="Teams">TEAMS</string>
     <string name="VS">VS</string>
@@ -39,4 +39,5 @@
     <string name="Roster">ROSTER</string>
     <string name="Headshot">Player headshot</string>
     <string name="OWLWebsite">Go to the official team website...</string>
+    <string name="News">NEWS</string>
 </resources>

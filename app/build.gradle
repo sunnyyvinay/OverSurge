@@ -6,8 +6,8 @@ android {
         applicationId "com.sunnyvinay.overstats"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 13
-        versionName "1.6.1"
+        versionCode 14
+        versionName "1.7.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -41,5 +41,4 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
-
 }
