@@ -334,7 +334,7 @@ public class HomeFragment extends Fragment {
         protected String doInBackground(Void... params) {
             Document titleDoc;
             try {
-                titleDoc = Jsoup.connect("https://playoverwatch.com/en-us/").get();
+                titleDoc = Jsoup.connect("https://playoverwatch.com/en-us/news/").get();
 
                 //Elements titles = titleDoc.select("a[data-media-title]");
                 Elements titles = titleDoc.getElementsByClass("Card-title");
@@ -359,7 +359,7 @@ public class HomeFragment extends Fragment {
                 for (Element baseLink : links) {
                     String link = baseLink.attr("href");
                     if (!link.startsWith("https:")) {
-                        link = "https://playoverwatch.com/en-us" + link;
+                        link = "https://playoverwatch.com" + link;
                     }
                     linkList.add(link);
                 }
@@ -605,13 +605,13 @@ public class HomeFragment extends Fragment {
             String patchTitle = "Latest Patch Notes";
             String ptrPatchTitle = "Latest PTR Patch Notes";
             try {
-                titleDoc = Jsoup.connect("https://blizztrack.com/overwatch/retail").get();
-                ptrTitleDoc = Jsoup.connect("https://blizztrack.com/overwatch/ptr").get();
+                titleDoc = Jsoup.connect("https://playoverwatch.com/en-us/news/patch-notes/live").get();
+                ptrTitleDoc = Jsoup.connect("https://playoverwatch.com/en-us/news/patch-notes/ptr").get();
 
-                Elements titles = titleDoc.select("h2");
-                Elements ptrTitles = ptrTitleDoc.select("h2");
-                for (Element title : titles) patchTitle = title.text();
-                for (Element title : ptrTitles) ptrPatchTitle = title.text();
+                Elements titles = titleDoc.getElementsByClass("PatchNotes-patchTitle");
+                Elements ptrTitles = ptrTitleDoc.getElementsByClass("PatchNotes-patchTitle");
+                patchTitle = titles.get(0).text();
+                ptrPatchTitle = ptrTitles.get(0).text();
             } catch (IOException e) {
                 e.printStackTrace();
             }

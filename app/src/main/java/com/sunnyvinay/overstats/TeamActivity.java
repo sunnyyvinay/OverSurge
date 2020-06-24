@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,9 +28,14 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class TeamActivity extends AppCompatActivity {
     ActionBar bar;
@@ -45,6 +52,7 @@ public class TeamActivity extends AppCompatActivity {
     String team;
     int teamNum;
     String website;
+    String website2; // used for web scraping
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,11 @@ public class TeamActivity extends AppCompatActivity {
         bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(true);
         bar.setTitle(team);
+
+        StringTokenizer st = new StringTokenizer(team);
+        String pureName = st. nextToken();
+        pureName = st.nextToken().toLowerCase();
+        website2 = "https://" + pureName + ".overwatchleague.com/en-us";
 
         new UpdateTeam().execute("https://api.overwatchleague.com/v2/teams");
     }
@@ -135,19 +148,54 @@ public class TeamActivity extends AppCompatActivity {
                 rosterRecycler.setAdapter(teamAdapter);
             } catch (JSONException e) {
                 // Error loading team
-                new AlertDialog.Builder(getApplicationContext())
-                        .setTitle("Error loading selected team")
-                        .setMessage("An error has occurred. Please try again later")
-                        .setIcon(R.drawable.warning_ic)
-                        .setNeutralButton("BACK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Continue with delete operation
-                                Intent intent = new Intent(TeamActivity.this, OWLActivity.class);
-                                startActivity(intent);
-                            }
-                        }).show();
+                e.printStackTrace();
+                android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(TeamActivity.this).create();
+
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("An error occurred. Please try again later");
+                alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.setButton(Dialog.BUTTON_NEUTRAL,"TRY AGAIN",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(TeamActivity.this, OWLActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                alertDialog.show();
+            }
+        }
+    }
+
+    private class UpdateWebTeam extends AsyncTask<Void, Void, String> {
+        Document teamDoc;
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String standing = "";
+            try {
+                teamDoc = Jsoup.connect(website2).get();
+                Elements data = teamDoc.select("div.eYrjbk");
+                /*
+                for (int i = 0; i < data.size(); i++) {
+                    standing = data.select("team-infostyles__Data-dymuzk-4 kAIQPC")
+                            .select("p")
+                            .eq(i)
+                            .text();
+                }
+
+                 */
+                standing = data.get(1).text();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            return standing;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.i("Standing", result);
         }
     }
 
