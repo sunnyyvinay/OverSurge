@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.squareup.picasso.Picasso;
@@ -164,38 +165,6 @@ public class TeamActivity extends AppCompatActivity {
                 });
                 alertDialog.show();
             }
-        }
-    }
-
-    private class UpdateWebTeam extends AsyncTask<Void, Void, String> {
-        Document teamDoc;
-
-        @Override
-        protected String doInBackground(Void... params) {
-            String standing = "";
-            try {
-                teamDoc = Jsoup.connect(website2).get();
-                Elements data = teamDoc.select("div.eYrjbk");
-                /*
-                for (int i = 0; i < data.size(); i++) {
-                    standing = data.select("team-infostyles__Data-dymuzk-4 kAIQPC")
-                            .select("p")
-                            .eq(i)
-                            .text();
-                }
-
-                 */
-                standing = data.get(1).text();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return standing;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Log.i("Standing", result);
         }
     }
 
