@@ -35,6 +35,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -115,7 +116,9 @@ public class TeamActivity extends AppCompatActivity {
                 websiteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+                        Intent browserIntent = new Intent(TeamActivity.this, WebsiteActivity.class);
+                        browserIntent.putExtra("Team", team);
+                        browserIntent.putExtra("website", website);
                         startActivity(browserIntent);
                     }
                 });
@@ -134,6 +137,7 @@ public class TeamActivity extends AppCompatActivity {
 
                 JSONArray rosterJsonArray = jsonTeam.getJSONArray("players");
                 ArrayList<String> names = new ArrayList<>(rosterJsonArray.length());
+                ArrayList<String> realNames = new ArrayList<>(rosterJsonArray.length());
                 ArrayList<String> headshots = new ArrayList<>(rosterJsonArray.length());
                 ArrayList<String> roles = new ArrayList<>(rosterJsonArray.length());
 
@@ -141,11 +145,12 @@ public class TeamActivity extends AppCompatActivity {
                     names.add(rosterJsonArray.getJSONObject(i).getString("name"));
                     headshots.add(rosterJsonArray.getJSONObject(i).getString("headshot"));
                     roles.add(rosterJsonArray.getJSONObject(i).getString("role"));
+                    realNames.add(rosterJsonArray.getJSONObject(i).getString("fullName"));
                 }
 
                 rosterRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 rosterRecycler.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-                SingleTeamAdapter teamAdapter = new SingleTeamAdapter(getBaseContext(), names, headshots, roles);
+                SingleTeamAdapter teamAdapter = new SingleTeamAdapter(getBaseContext(), names, realNames, headshots, roles);
                 rosterRecycler.setAdapter(teamAdapter);
             } catch (JSONException e) {
                 // Error loading team

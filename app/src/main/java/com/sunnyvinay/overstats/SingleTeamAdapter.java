@@ -19,15 +19,17 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
     private ArrayList<String> headshots;
     private ArrayList<String> names;
     private ArrayList<String> roles;
+    private ArrayList<String> realNames;
     private LayoutInflater mInflater;
     private final Context context;
 
-    SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> headshots, ArrayList<String> roles) {
+    SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> realNames, ArrayList<String> headshots, ArrayList<String> roles) {
         this.mInflater = LayoutInflater.from(context);
         this.names = names;
         this.headshots = headshots;
         this.roles = roles;
         this.context = context;
+        this.realNames = realNames;
     }
 
     @NotNull
@@ -43,6 +45,7 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
         Picasso.get().load(headshots.get(position)).into(holder.headshot);
         holder.name.setText(names.get(position));
         holder.role.setText(roles.get(position).toUpperCase());
+        holder.realName.setText(realNames.get(position));
     }
 
     // total number of rows
@@ -55,12 +58,14 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
         ImageView headshot;
         TextView name;
         TextView role;
+        TextView realName;
 
         ViewHolder(View itemView) {
             super(itemView);
             headshot = itemView.findViewById(R.id.headshot);
             name = itemView.findViewById(R.id.name);
             role = itemView.findViewById(R.id.role);
+            realName = itemView.findViewById(R.id.realName);
         }
     }
 }
