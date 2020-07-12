@@ -44,7 +44,12 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Picasso.get().load(headshots.get(position)).into(holder.headshot);
         holder.name.setText(names.get(position));
-        holder.role.setText(roles.get(position).toUpperCase());
+        if (roles.get(position).equals("offense")) {
+            holder.role.setText("DAMAGE");
+        } else {
+            holder.role.setText(roles.get(position).toUpperCase());
+        }
+
         holder.realName.setText(realNames.get(position));
     }
 
