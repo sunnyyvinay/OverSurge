@@ -1,7 +1,6 @@
 package com.sunnyvinay.overstats;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,12 +15,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.squareup.picasso.Picasso;
@@ -29,13 +26,8 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -53,6 +45,7 @@ public class TeamActivity extends AppCompatActivity {
 
     String team;
     int teamNum;
+    ArrayList<String> teamList;
     String website;
     String website2; // used for web scraping
 
@@ -80,6 +73,7 @@ public class TeamActivity extends AppCompatActivity {
 
         team = getIntent().getStringExtra("Team");
         teamNum = getIntent().getIntExtra("TeamNum", 0);
+        teamList = getIntent().getStringArrayListExtra("Teams");
 
         bar = getSupportActionBar();
         bar.setDisplayHomeAsUpEnabled(true);

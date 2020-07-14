@@ -17,15 +17,15 @@ import java.util.ArrayList;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     private ArrayList<String> teamNames;
-    private ArrayList<String> teamIcons;
+    private String[][] teamList;
     private LayoutInflater mInflater;
     private final Context context;
 
     // data is passed into the constructor
-    TeamAdapter(Context context, ArrayList<String> teamNames, ArrayList<String> teamIcons) {
+    TeamAdapter(Context context, String[][] teamList, ArrayList<String> teamNames) {
         this.mInflater = LayoutInflater.from(context);
         this.teamNames = teamNames;
-        this.teamIcons = teamIcons;
+        this.teamList = teamList;
         this.context = context;
     }
 
@@ -42,8 +42,11 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         SharedPreferences settings = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
-        holder.name.setText(teamNames.get(position));
-        Picasso.get().load(teamIcons.get(position)).into(holder.icon);
+        //holder.name.setText(teamNames.get(position));
+        //Picasso.get().load(teamIcons.get(position)).into(holder.icon);
+        holder.name.setText(teamList[position][0]);
+        Picasso.get().load(teamList[position][1]).into(holder.icon);
+
         if (settings.getBoolean("Theme", true)) {
             holder.name.setTextColor(context.getResources().getColor(R.color.shockWhite));
         } else {
@@ -71,11 +74,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-                String teamName = teamNames.get(getAdapterPosition());
-                int teamNum = getAdapterPosition();
+                String teamName = teamList[getAdapterPosition()][0];
+                int teamNum = teamNames.indexOf(teamName);
                 Intent intent = new Intent(context, TeamActivity.class);
                 intent.putExtra("Team", teamName);
                 intent.putExtra("TeamNum", teamNum);
+                intent.putExtra("Teams", teamNames);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
         }

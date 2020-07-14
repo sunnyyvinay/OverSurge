@@ -21,13 +21,11 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class OWLActivity extends AppCompatActivity {
     ActionBar owlBar;
@@ -135,16 +133,20 @@ public class OWLActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             ArrayList<String> teamNames = new ArrayList<>();
-            ArrayList<String> teamIcons = new ArrayList<>();
+            //ArrayList<String> teamIcons = new ArrayList<>();
+            String[][] teamList = new String[20][2];
             try {
                 JSONObject teamsObject = new JSONObject(result);
                 JSONArray jsonTeams = teamsObject.getJSONArray("data");
 
                 for (int i = 0; i < jsonTeams.length(); i++) {
                     teamNames.add(jsonTeams.getJSONObject(i).getString("name"));
-                    teamIcons.add(jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png"));
+                    //teamIcons.add(jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png"));
+                    teamList[i][0] = jsonTeams.getJSONObject(i).getString("name");
+                    teamList[i][1] = jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png");
                 }
-                TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), teamNames, teamIcons);
+                sort(teamList, 0);
+                TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), teamList, teamNames);
                 teams.setAdapter(teamAdapter);
 
             } catch (JSONException e) {
@@ -215,5 +217,20 @@ public class OWLActivity extends AppCompatActivity {
                 secondNewsCard.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    // sort teams alphabetically
+    public static String[][] sort(String[][] array, final int sortIndex) {
+        if (array.length < 2) {
+            return array;
+        }
+
+        Arrays.sort(array, new Comparator<String[]>() {
+            public int compare(String[] o1, String[] o2) {
+                return o1[sortIndex].compareToIgnoreCase(o2[sortIndex]);
+            }
+        });
+
+        return array;
     }
 }
