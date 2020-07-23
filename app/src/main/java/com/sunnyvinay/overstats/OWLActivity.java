@@ -143,7 +143,11 @@ public class OWLActivity extends AppCompatActivity {
                     teamNames.add(jsonTeams.getJSONObject(i).getString("name"));
                     //teamIcons.add(jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png"));
                     teamList[i][0] = jsonTeams.getJSONObject(i).getString("name");
-                    teamList[i][1] = jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png");
+                    if (settings.getBoolean("Theme", true) && !teamList[i][0].equals("London Spitfire")) {
+                        teamList[i][1] = jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("altDark").getString("png");
+                    } else {
+                        teamList[i][1] = jsonTeams.getJSONObject(i).getJSONObject("logo").getJSONObject("main").getString("png");
+                    }
                 }
                 sort(teamList, 0);
                 TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), teamList, teamNames);

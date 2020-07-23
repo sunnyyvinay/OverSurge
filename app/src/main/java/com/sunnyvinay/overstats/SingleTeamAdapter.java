@@ -20,16 +20,18 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
     private ArrayList<String> names;
     private ArrayList<String> roles;
     private ArrayList<String> realNames;
+    private ArrayList<String> numbers;
     private LayoutInflater mInflater;
     private final Context context;
 
-    SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> realNames, ArrayList<String> headshots, ArrayList<String> roles) {
+    SingleTeamAdapter(Context context, ArrayList<String> names, ArrayList<String> realNames, ArrayList<String> headshots, ArrayList<String> roles, ArrayList<String> numbers) {
         this.mInflater = LayoutInflater.from(context);
         this.names = names;
         this.headshots = headshots;
         this.roles = roles;
         this.context = context;
         this.realNames = realNames;
+        this.numbers = numbers;
     }
 
     @NotNull
@@ -51,6 +53,7 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
         }
 
         holder.realName.setText(realNames.get(position));
+        holder.number.setText(numbers.get(position));
     }
 
     // total number of rows
@@ -64,6 +67,7 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
         TextView name;
         TextView role;
         TextView realName;
+        TextView number;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -71,6 +75,7 @@ public class SingleTeamAdapter extends RecyclerView.Adapter<SingleTeamAdapter.Vi
             name = itemView.findViewById(R.id.name);
             role = itemView.findViewById(R.id.role);
             realName = itemView.findViewById(R.id.realName);
+            number = itemView.findViewById(R.id.number);
         }
     }
 }

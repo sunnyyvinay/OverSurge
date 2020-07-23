@@ -134,17 +134,19 @@ public class TeamActivity extends AppCompatActivity {
                 ArrayList<String> realNames = new ArrayList<>(rosterJsonArray.length());
                 ArrayList<String> headshots = new ArrayList<>(rosterJsonArray.length());
                 ArrayList<String> roles = new ArrayList<>(rosterJsonArray.length());
+                ArrayList<String> numbers = new ArrayList<>(rosterJsonArray.length());
 
                 for (int i = 0; i < rosterJsonArray.length(); i++) {
                     names.add(rosterJsonArray.getJSONObject(i).getString("name"));
                     headshots.add(rosterJsonArray.getJSONObject(i).getString("headshot"));
                     roles.add(rosterJsonArray.getJSONObject(i).getString("role"));
                     realNames.add(rosterJsonArray.getJSONObject(i).getString("fullName"));
+                    numbers.add(rosterJsonArray.getJSONObject(i).getString("number"));
                 }
 
                 rosterRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 rosterRecycler.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL));
-                SingleTeamAdapter teamAdapter = new SingleTeamAdapter(getBaseContext(), names, realNames, headshots, roles);
+                SingleTeamAdapter teamAdapter = new SingleTeamAdapter(getBaseContext(), names, realNames, headshots, roles, numbers);
                 rosterRecycler.setAdapter(teamAdapter);
             } catch (JSONException e) {
                 // Error loading team
