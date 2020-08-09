@@ -19,16 +19,6 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
-        settings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-
-        if (settings.getBoolean("Theme", true)) {
-            this.setTheme(R.style.Shock);
-        } else {
-            this.setTheme(R.style.Shocklight);
-        }
-         */
-
         super.onCreate(savedInstanceState);
 
         settings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
