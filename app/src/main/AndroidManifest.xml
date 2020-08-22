@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/app_ic_round"
         android:supportsRtl="true"
         android:theme="@style/Shock"
-        android:versionCode="19"
-        android:versionName="1.10.1">
+        android:versionCode="20"
+        android:versionName="1.11.1">
         <activity android:name=".WebsiteActivity" />
         <activity android:name=".TeamActivity" />
         <activity android:name=".LeagueDisplayActivity" />

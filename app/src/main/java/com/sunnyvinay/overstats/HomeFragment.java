@@ -102,6 +102,12 @@ public class HomeFragment extends Fragment {
     private TextView homeTeam;
     private TextView hideScoresOption;
 
+    private CardView owlNextCard;
+    private ImageView nextHomeLogo;
+    private TextView nextHomeName;
+    private TextView nextAwayName;
+    private ImageView nextAwayLogo;
+
     private boolean showScores;
 
     private CardView owlDetailsCard;
@@ -177,6 +183,12 @@ public class HomeFragment extends Fragment {
         awayTeam = view.findViewById(R.id.awayTeam);
         homeTeam = view.findViewById(R.id.homeTeam);
         hideScoresOption = view.findViewById(R.id.hideScoreOptions);
+
+        owlNextCard = view.findViewById(R.id.owlNextCard);
+        nextHomeLogo = view.findViewById(R.id.nextHomeLogo);
+        nextHomeName = view.findViewById(R.id.nextHomeName);
+        nextAwayName = view.findViewById(R.id.nextAwayName);
+        nextAwayLogo = view.findViewById(R.id.nextAwayLogo);
 
         owlDetailsCard = view.findViewById(R.id.owlDetailsCard);
         owlDetailsArrow = view.findViewById(R.id.owlDetailsArrow);
@@ -651,6 +663,7 @@ public class HomeFragment extends Fragment {
                 JSONObject response = new JSONObject(result);
                 JSONObject data = response.getJSONObject("data");
                 JSONObject liveMatch = data.getJSONObject("liveMatch");
+                JSONObject nextMatch = data.getJSONObject("nextMatch");
 
                 if (liveMatch.equals(null)) {
                     // No match data available
@@ -702,6 +715,19 @@ public class HomeFragment extends Fragment {
                         matchText.setText(R.string.VS);
                         hideScoresOption.setText(R.string.UpcomingMatch);
                     }
+                }
+
+                if (nextMatch.equals(null)) {
+                    // no next match is available
+                    owlNextCard.setVisibility(View.INVISIBLE);
+                } else {
+                    JSONArray competitors = nextMatch.getJSONArray("competitors");
+                    JSONObject home = competitors.getJSONObject(0);
+                    JSONObject away = competitors.getJSONObject(1);
+                    Picasso.get().load(away.getString("logo")).into(nextAwayLogo);
+                    Picasso.get().load(home.getString("logo")).into(nextHomeLogo);
+                    nextAwayName.setText(away.getString("abbreviatedName"));
+                    nextHomeName.setText(home.getString("abbreviatedName"));
                 }
 
             } catch (JSONException e) {
