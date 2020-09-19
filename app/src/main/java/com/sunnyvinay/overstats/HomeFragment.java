@@ -665,7 +665,7 @@ public class HomeFragment extends Fragment {
                 JSONObject liveMatch = data.getJSONObject("liveMatch");
                 JSONObject nextMatch = data.getJSONObject("nextMatch");
 
-                if (liveMatch.equals(null)) {
+                if (liveMatch.length() == 0) {
                     // No match data available
                     matchLayout.setVisibility(View.GONE);
                     noMatchLayout.setVisibility(View.VISIBLE);
@@ -717,10 +717,11 @@ public class HomeFragment extends Fragment {
                     }
                 }
 
-                if (nextMatch.equals(null)) {
+                if (nextMatch.length() == 0) {
                     // no next match is available
-                    owlNextCard.setVisibility(View.INVISIBLE);
+                    owlNextCard.setVisibility(View.GONE);
                 } else {
+                    owlNextCard.setVisibility(View.VISIBLE);
                     JSONArray competitors = nextMatch.getJSONArray("competitors");
                     JSONObject home = competitors.getJSONObject(0);
                     JSONObject away = competitors.getJSONObject(1);
@@ -734,6 +735,7 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
                 matchLayout.setVisibility(View.GONE);
                 noMatchLayout.setVisibility(View.VISIBLE);
+                owlNextCard.setVisibility(View.GONE);
             }
         }
     }

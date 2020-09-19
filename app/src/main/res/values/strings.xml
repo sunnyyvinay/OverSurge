@@ -4,9 +4,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="AboutApp">OverSurge is an app that gives you player stats, news, patch notes, and Overwatch League info. Any player entered must have a public profile and usernames are cap sensitive.</string>
     <string name="OverwatchNews">LATEST OVERWATCH NEWS</string>
     <string name="YourAccount">YOUR ACCOUNT</string>

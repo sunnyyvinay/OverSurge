@@ -6,8 +6,8 @@ android {
         applicationId "com.sunnyvinay.overstats"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 20
-        versionName "1.11.1"
+        versionCode 21
+        versionName "1.11.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
