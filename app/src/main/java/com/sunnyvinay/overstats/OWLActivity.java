@@ -217,8 +217,8 @@ public class OWLActivity extends AppCompatActivity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
-                firstNewsCard.setVisibility(View.INVISIBLE);
-                secondNewsCard.setVisibility(View.INVISIBLE);
+                firstNewsCard.setVisibility(View.GONE);
+                secondNewsCard.setVisibility(View.GONE);
             }
         }
     }

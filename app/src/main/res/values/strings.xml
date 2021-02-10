@@ -38,4 +38,5 @@
     <string name="OWLWebsite">Go to the official team website...</string>
     <string name="News">NEWS</string>
     <string name="Next">NEXT</string>
+    <string name="OWLTempMsg">The 2021 Overwatch League season has not started..</string>
 </resources>
