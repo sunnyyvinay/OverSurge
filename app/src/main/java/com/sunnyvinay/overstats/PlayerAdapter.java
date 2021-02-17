@@ -202,8 +202,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
                         tankSR.setVisibility(View.VISIBLE);
                         supportSR.setVisibility(View.VISIBLE);
                         supportIcon.setVisibility(View.VISIBLE);
-                        //damageSR.setText(Integer.toString(player.getDamage()));
-                        //Picasso.get().load(player.getDamageURL()).into(damageIcon);
 
                         if (player.getTank() == 0) {
                             tankSR.setVisibility(View.INVISIBLE);

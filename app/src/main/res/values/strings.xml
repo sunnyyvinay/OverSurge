@@ -39,4 +39,7 @@
     <string name="News">NEWS</string>
     <string name="Next">NEXT</string>
     <string name="OWLTempMsg">The 2021 Overwatch League season has not started..</string>
+    <string name="tanklabel">TANK</string>
+    <string name="damagelabel">DPS</string>
+    <string name="supportlabel">SUPP</string>
 </resources>
