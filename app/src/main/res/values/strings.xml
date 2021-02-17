@@ -8,7 +8,7 @@
     <string name="OverwatchNews">LATEST OVERWATCH NEWS</string>
     <string name="YourAccount">YOUR ACCOUNT</string>
     <string name="AccountOptional">You can save your account and it will be displayed on the home page for easy access. This is optional and can be changed at any time.</string>
-    <string name="SearchPrivateProfile">This user has a private profile</string>
+    <string name="SearchPrivateProfile">This player has a private profile</string>
     <string name="AccountNotSet">Your Blizzard account has not been entered. Go to "Settings" and enter your username and tag"</string>
     <string name="AccountPrivateProfile">Your account is private. For your stats to show, switch to public profile.</string>
     <string name="AccountNotExist">The Blizzard account that you entered does not exist. Please fix it in "Settings" or check your internet connection</string>

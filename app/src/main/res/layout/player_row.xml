@@ -17,12 +17,12 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="1.5"
         android:fontFamily="casual"
         android:paddingLeft="5dp"
-        android:paddingTop="10dp"
         android:text="Name"
         android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
@@ -40,6 +40,7 @@
         android:id="@+id/tankSR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.5"
         android:text="0000"
         android:textStyle="bold" />
@@ -56,6 +57,7 @@
         android:id="@+id/damageSR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.5"
         android:text="0000"
         android:textStyle="bold" />
@@ -72,6 +74,7 @@
         android:id="@+id/supportSR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.5"
         android:text="0000"
         android:textStyle="bold" />

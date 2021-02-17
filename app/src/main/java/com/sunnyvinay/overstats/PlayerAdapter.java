@@ -22,6 +22,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     private LayoutInflater mInflater;
     private final Context context;
     private SharedPreferences settings;
+    private boolean combined;
 
     // data is passed into the constructor
     public PlayerAdapter(Context context, ArrayList<Player> data) {
@@ -41,6 +42,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         settings = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        combined = false;
         Player player = mData.get(position);
         Picasso.get().load(player.getIconURL()).into(holder.icon);
         holder.name.setText(player.getUsername());
@@ -55,7 +57,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         holder.supportIcon.setVisibility(View.VISIBLE);
 
         if (player.getUsername().length() >= 10) {
-            holder.name.setTextSize(15);
+            holder.name.setTextSize(11);
+        } else if (player.getUsername().length() >= 7 && player.getUsername().length() <= 9) {
+            holder.name.setTextSize(16);
         } else {
             holder.name.setTextSize(18);
         }
@@ -72,7 +76,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
         } else {
             if (player.getTank() == 0) {
-                holder.tankSR.setText("0000");
+                //holder.tankSR.setText("0000");
+                holder.tankSR.setVisibility(View.INVISIBLE);
                 holder.tankIcon.setVisibility(View.INVISIBLE);
             } else {
                 holder.tankSR.setText(Integer.toString(player.getTank()));
@@ -80,7 +85,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
             }
 
             if (player.getDamage() == 0) {
-                holder.damageSR.setText("0000");
+                //holder.damageSR.setText("0000");
+                holder.damageSR.setVisibility(View.INVISIBLE);
                 holder.damageIcon.setVisibility(View.INVISIBLE);
             } else {
                 holder.damageSR.setText(Integer.toString(player.getDamage()));
@@ -88,7 +94,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
             }
 
             if (player.getSupport() == 0) {
-                holder.supportSR.setText("0000");
+                //holder.supportSR.setText("0000");
+                holder.supportSR.setVisibility(View.INVISIBLE);
                 holder.supportIcon.setVisibility(View.INVISIBLE);
             } else {
                 holder.supportSR.setText(Integer.toString(player.getSupport()));
@@ -178,7 +185,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
                 context.startActivity(intent);
             } else {
                 if (player.getTank() != 0 || player.getDamage() != 0 || player.getSupport() != 0) {
-                    if (tankSR.getVisibility() == View.VISIBLE) {
+                    if (!combined) {
+                        combined = true;
                         int numOfRoles = (player.getTank() == 0 ? 0 : 1) + (player.getDamage() == 0 ? 0 : 1) + (player.getSupport() == 0 ? 0 : 1);
                         int combinedSR = (player.getTank() + player.getDamage() + player.getSupport()) / numOfRoles;
 
@@ -189,12 +197,37 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
                         damageSR.setText(Integer.toString(combinedSR));
                         Picasso.get().load(getCompIcon(combinedSR)).into(damageIcon);
                     } else {
+                        combined = false;
                         tankIcon.setVisibility(View.VISIBLE);
                         tankSR.setVisibility(View.VISIBLE);
                         supportSR.setVisibility(View.VISIBLE);
                         supportIcon.setVisibility(View.VISIBLE);
-                        damageSR.setText(Integer.toString(player.getDamage()));
-                        Picasso.get().load(player.getDamageURL()).into(damageIcon);
+                        //damageSR.setText(Integer.toString(player.getDamage()));
+                        //Picasso.get().load(player.getDamageURL()).into(damageIcon);
+
+                        if (player.getTank() == 0) {
+                            tankSR.setVisibility(View.INVISIBLE);
+                            tankIcon.setVisibility(View.INVISIBLE);
+                        } else {
+                            tankSR.setText(Integer.toString(player.getTank()));
+                            Picasso.get().load(player.getTankURL()).into(tankIcon);
+                        }
+
+                        if (player.getDamage() == 0) {
+                            damageSR.setVisibility(View.INVISIBLE);
+                            damageIcon.setVisibility(View.INVISIBLE);
+                        } else {
+                            damageSR.setText(Integer.toString(player.getDamage()));
+                            Picasso.get().load(player.getDamageURL()).into(damageIcon);
+                        }
+
+                        if (player.getSupport() == 0) {
+                            supportSR.setVisibility(View.INVISIBLE);
+                            supportIcon.setVisibility(View.INVISIBLE);
+                        } else {
+                            supportSR.setText(Integer.toString(player.getSupport()));
+                            Picasso.get().load(player.getSupportURL()).into(supportIcon);
+                        }
                     }
                 }
             }
