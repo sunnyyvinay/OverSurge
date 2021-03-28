@@ -192,6 +192,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
                         tankIcon.setVisibility(View.INVISIBLE);
                         tankSR.setVisibility(View.INVISIBLE);
+                        damageSR.setVisibility(View.VISIBLE);
+                        damageIcon.setVisibility(View.VISIBLE);
                         supportSR.setVisibility(View.INVISIBLE);
                         supportIcon.setVisibility(View.INVISIBLE);
                         damageSR.setText(Integer.toString(combinedSR));
@@ -200,6 +202,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
                         combined = false;
                         tankIcon.setVisibility(View.VISIBLE);
                         tankSR.setVisibility(View.VISIBLE);
+                        damageSR.setVisibility(View.VISIBLE);
+                        damageIcon.setVisibility(View.VISIBLE);
                         supportSR.setVisibility(View.VISIBLE);
                         supportIcon.setVisibility(View.VISIBLE);
 
