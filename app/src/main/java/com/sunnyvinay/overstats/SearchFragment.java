@@ -306,7 +306,7 @@ public class SearchFragment extends Fragment {
                         supportIcon.setVisibility(View.VISIBLE);
                     }
 
-                    Picasso.get().load(iconURL).into(cardIcon);
+                    if (!iconURL.equals("")) Picasso.get().load(iconURL).into(cardIcon);
 
                     statsCard.setVisibility(View.VISIBLE);
 

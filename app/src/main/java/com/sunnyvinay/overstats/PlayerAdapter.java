@@ -44,7 +44,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         settings = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
         combined = false;
         Player player = mData.get(position);
-        Picasso.get().load(player.getIconURL()).into(holder.icon);
+        if (!player.getIconURL().equals("")) Picasso.get().load(player.getIconURL()).into(holder.icon);
         holder.name.setText(player.getUsername());
 
         Picasso.get().load(R.drawable.delete_ic).into(holder.playerDelete);

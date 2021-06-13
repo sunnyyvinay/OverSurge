@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -539,7 +541,7 @@ public class HomeFragment extends Fragment {
                         accountSupportSRIcon.setVisibility(View.VISIBLE);
                     }
 
-                    Picasso.get().load(iconURL).into(accountIcon);
+                    if (!iconURL.equals("")) Picasso.get().load(iconURL).into(accountIcon);
 
 
                     Picasso.get().load("https://vignette.wikia.nocookie.net/overwatch/images/6/69/TankIcon.png").into(accountTankIcon);
@@ -761,6 +763,7 @@ public class HomeFragment extends Fragment {
                 JSONObject stats = new JSONObject(result);
 
                 player.setIconURL(stats.getString("icon"));
+                Log.i("Current player icon", stats.getString("icon"));
                 player.setGamesWon(stats.getInt("gamesWon"));
 
                 player.setTank(0);
