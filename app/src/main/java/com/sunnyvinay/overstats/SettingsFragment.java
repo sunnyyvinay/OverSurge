@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
     private Switch themeSwitch;
@@ -36,6 +42,8 @@ public class SettingsFragment extends Fragment {
 
     BottomNavigationView bottomNavigationView;
 
+    ArrayList<Player> players = new ArrayList<>();
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +60,8 @@ public class SettingsFragment extends Fragment {
         bottomNavigationView = getActivity().findViewById(R.id.navigation);
 
         settingsFrame = view.findViewById(R.id.settingsFrame);
+
+        players = getArrayList("Players");
 
         if (settings.getBoolean("Theme", true)) {
             themeSwitch.setChecked(true);
@@ -123,9 +133,22 @@ public class SettingsFragment extends Fragment {
         submitAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingsEditor.putString("Username", userEnter.getText().toString());
-                settingsEditor.putString("Tag", tagEnter.getText().toString());
-                settingsEditor.putInt("Platform", platformSelect.getSelectedItemPosition());
+                String username = userEnter.getText().toString();
+                String tag = tagEnter.getText().toString();
+                int platform = platformSelect.getSelectedItemPosition();
+
+                // Does user account exist in saved account list? If so, delete
+                for (Player p : players) {
+                    if (p.getUsername().equals(username) && p.getTag().equals(tag)) {
+                        players.remove(p);
+                        saveArrayList(players, "Players");
+                        break;
+                    }
+                }
+
+                settingsEditor.putString("Username", username);
+                settingsEditor.putString("Tag", tag);
+                settingsEditor.putInt("Platform", platform);
                 settingsEditor.apply();
                 hideKeyboard(getActivity());
                 Toast accountSaved = Toast.makeText(getActivity(),
@@ -142,6 +165,23 @@ public class SettingsFragment extends Fragment {
         settings = this.getActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
         return inflater.inflate(R.layout.fragment_settings, container, false);
+    }
+
+    public ArrayList<Player> getArrayList(String key){
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Gson gson = new Gson();
+        String json = settings.getString(key, null);
+        Type type = new TypeToken<ArrayList<Player>>() {}.getType();
+        return gson.fromJson(json, type);
+    }
+
+    public void saveArrayList(ArrayList<Player> players, String key){
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = settings.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(players);
+        editor.putString(key, json);
+        editor.apply();
     }
 
     private boolean loadFragment(Fragment fragment) {

@@ -541,8 +541,12 @@ public class HomeFragment extends Fragment {
                         accountSupportSRIcon.setVisibility(View.VISIBLE);
                     }
 
-                    if (!iconURL.equals("")) Picasso.get().load(iconURL).into(accountIcon);
-
+                    try {
+                        Picasso.get().load(iconURL).into(accountIcon);
+                    } catch (NullPointerException | IllegalArgumentException e) {
+                        e.printStackTrace();
+                    }
+                    //if (!iconURL.isEmpty()) Picasso.get().load(iconURL).into(accountIcon);
 
                     Picasso.get().load("https://vignette.wikia.nocookie.net/overwatch/images/6/69/TankIcon.png").into(accountTankIcon);
                     Picasso.get().load("https://vignette.wikia.nocookie.net/overwatch/images/1/14/OffenseIcon.png").into(accountDamageIcon);

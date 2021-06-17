@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +46,12 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         settings = context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
         combined = false;
         Player player = mData.get(position);
-        if (!player.getIconURL().equals("")) Picasso.get().load(player.getIconURL()).into(holder.icon);
+        try {
+            Picasso.get().load(player.getIconURL()).into(holder.icon);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        // if (!player.getIconURL().isEmpty()) Picasso.get().load(player.getIconURL()).into(holder.icon);
         holder.name.setText(player.getUsername());
 
         Picasso.get().load(R.drawable.delete_ic).into(holder.playerDelete);
