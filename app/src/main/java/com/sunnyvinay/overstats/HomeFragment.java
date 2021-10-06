@@ -82,6 +82,10 @@ public class HomeFragment extends Fragment {
 
     private AlertDialog internetCheck;
 
+    private TextView tankLabel;
+    private TextView damageLabel;
+    private TextView supportLabel;
+    private CardView accountCard;
     private CardView playerDetailsCard;
 
     private ImageView accountCombinedIcon;
@@ -162,6 +166,10 @@ public class HomeFragment extends Fragment {
         accountSupportSR = view.findViewById(R.id.accountSupportSR);
         accountProblem = view.findViewById(R.id.accountProblem);
 
+        tankLabel = view.findViewById(R.id.tankLabel);
+        damageLabel = view.findViewById(R.id.damageLabel);
+        supportLabel = view.findViewById(R.id.supportLabel);
+        accountCard = view.findViewById(R.id.accountCard);
         playerDetailsCard = view.findViewById(R.id.playerDetailsCard);
 
         accountCombinedIcon = view.findViewById(R.id.accountCombinedIcon);
@@ -286,10 +294,17 @@ public class HomeFragment extends Fragment {
         playerAdapter = new PlayerAdapter(getContext(), players);
 
         if (players.size() != 0) {
+            tankLabel.setVisibility(View.VISIBLE);
+            damageLabel.setVisibility(View.VISIBLE);
+            supportLabel.setVisibility(View.VISIBLE);
             for (int p = 0; p < players.size(); p++) {
                 new UpdatePlayer(players.get(p)).execute(players.get(p).getLink());
             }
             accountsRecycler.setAdapter(playerAdapter);
+        } else {
+            tankLabel.setVisibility(View.GONE);
+            damageLabel.setVisibility(View.GONE);
+            supportLabel.setVisibility(View.GONE);
         }
 
         ItemTouchHelper.Callback callback = new ItemMoveCallback(playerAdapter);
@@ -766,31 +781,34 @@ public class HomeFragment extends Fragment {
                 JSONArray ratings;
                 JSONObject stats = new JSONObject(result);
 
-                player.setIconURL(stats.getString("icon"));
-                Log.i("Current player icon", stats.getString("icon"));
-                player.setGamesWon(stats.getInt("gamesWon"));
+                if (stats.getBoolean("private")) {
+                    players.remove(player);
+                } else {
+                    player.setIconURL(stats.getString("icon"));
+                    player.setGamesWon(stats.getInt("gamesWon"));
 
-                player.setTank(0);
-                player.setDamage(0);
-                player.setSupport(0);
+                    player.setTank(0);
+                    player.setDamage(0);
+                    player.setSupport(0);
 
-                ratings = stats.getJSONArray("ratings");
+                    ratings = stats.getJSONArray("ratings");
 
-                for (int j = 0; j < ratings.length(); j++) {
-                    JSONObject currentRole = ratings.getJSONObject(j);
-                    switch (currentRole.getString("role")) {
-                        case "tank":
-                            player.setTank(currentRole.getInt("level"));
-                            player.setTankURL(currentRole.getString("rankIcon"));
-                            break;
-                        case "damage":
-                            player.setDamage(currentRole.getInt("level"));
-                            player.setDamageURL(currentRole.getString("rankIcon"));
-                            break;
-                        case "support":
-                            player.setSupport(currentRole.getInt("level"));
-                            player.setSupportURL(currentRole.getString("rankIcon"));
-                            break;
+                    for (int j = 0; j < ratings.length(); j++) {
+                        JSONObject currentRole = ratings.getJSONObject(j);
+                        switch (currentRole.getString("role")) {
+                            case "tank":
+                                player.setTank(currentRole.getInt("level"));
+                                player.setTankURL(currentRole.getString("rankIcon"));
+                                break;
+                            case "damage":
+                                player.setDamage(currentRole.getInt("level"));
+                                player.setDamageURL(currentRole.getString("rankIcon"));
+                                break;
+                            case "support":
+                                player.setSupport(currentRole.getInt("level"));
+                                player.setSupportURL(currentRole.getString("rankIcon"));
+                                break;
+                        }
                     }
                 }
             } catch (JSONException e) {
