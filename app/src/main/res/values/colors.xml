@@ -8,6 +8,19 @@
     <color name="shockGray">#b4b4b4</color>
     <color name="shockWhite">#ffffff</color>
 
+    <color name="gray">#b4b4b4</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="crimson">#EE0303</color>
+    <color name="shock">#ff5722</color>
+    <color name="honey">#dec821</color>
+    <color name="lime">#1FF805</color>
+    <color name="emerald">#028A0F</color>
+    <color name="sky">#05E2F8</color>
+    <color name="azure">#0561F8</color>
+    <color name="violet">#8D05F8</color>
+    <color name="rose">#F64A8A</color>
+
     <color name="reignRed">#EE0303</color>
     <color name="reignGray">#b4b4b4</color>
     <color name="reignBlack">#000000</color>

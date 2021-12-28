@@ -1,28 +1,171 @@
 <resources>
 
-    <!-- Base application theme. -->
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- SHOCK -->
     <style name="Shock" parent="Theme.AppCompat" >
-        <item name="colorPrimary">@color/shockOrange</item>
-        <item name="colorPrimaryDark">@color/shockGray</item>
-        <item name="colorAccent">@color/shockWhite</item>
-        <item name="colorControlNormal">@color/shockGray</item>
-        <item name="colorControlActivated">@color/shockOrange</item>
+        <item name="colorPrimary">@color/shock</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/shock</item>
     </style>
 
     <style name="Shocklight" parent="Theme.AppCompat.Light" >
-        <item name="colorPrimary">@color/shockOrange</item>
-        <item name="colorPrimaryDark">@color/shockGray</item>
-        <item name="colorAccent">@color/reignBlack</item>
-        <item name="colorControlNormal">@color/shockGray</item>
-        <item name="colorControlActivated">@color/shockOrange</item>
-        <item name="android:windowBackground">@color/shockWhite</item>
+        <item name="colorPrimary">@color/shock</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/shock</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- CRIMSON -->
+    <style name="Crimson" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/crimson</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/crimson</item>
+    </style>
+
+    <style name="Crimsonlight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/crimson</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/crimson</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- HONEY -->
+    <style name="Honey" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/honey</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/honey</item>
+    </style>
+
+    <style name="Honeylight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/honey</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/honey</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- LIME -->
+    <style name="Lime" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/lime</item>
+    </style>
+
+    <style name="Limelight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/lime</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/lime</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- EMERALD -->
+    <style name="Emerald" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/emerald</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/emerald</item>
+    </style>
+
+    <style name="Emeraldlight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/emerald</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/emerald</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- SKY -->
+    <style name="Sky" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/sky</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/sky</item>
+    </style>
+
+    <style name="Skylight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/sky</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/sky</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- AZURE -->
+    <style name="Azure" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/azure</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/azure</item>
+    </style>
+
+    <style name="Azurelight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/azure</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/azure</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- VIOLET -->
+    <style name="Violet" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/violet</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/violet</item>
+    </style>
+
+    <style name="Violetlight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/violet</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/violet</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <!-- ROSE -->
+    <style name="Rose" parent="Theme.AppCompat" >
+        <item name="colorPrimary">@color/rose</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/rose</item>
+    </style>
+
+    <style name="Roselight" parent="Theme.AppCompat.Light" >
+        <item name="colorPrimary">@color/rose</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/rose</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Reign" parent="Theme.AppCompat.NoActionBar" >
