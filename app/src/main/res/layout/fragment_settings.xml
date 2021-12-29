@@ -25,104 +25,98 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/aboutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/AboutApp"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/settingsLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp">
 
                 <Button
-                    android:id="@+id/submitAccount"
-                    android:layout_width="174dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="31dp"
-                    android:layout_marginBottom="204dp"
-                    android:backgroundTint="?attr/colorPrimary"
-                    android:text="save"
-                    android:textColor="?attr/colorAccent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/userEnter"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Spinner
-                    android:id="@+id/platformSelect"
-                    android:layout_width="69dp"
-                    android:layout_height="29dp"
+                    android:id="@+id/themeColorSelect"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
                     android:background="?attr/colorPrimary"
-                    android:spinnerMode="dropdown"
-                    android:textAlignment="center"
-                    android:textColor="?attr/colorAccent"
-                    android:theme="@style/Shock"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.959"
+                    app:layout_constraintHorizontal_bias="0.95"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/aboutText"
-                    app:layout_constraintVertical_bias="0.498" />
-
-                <Switch
-                    android:id="@+id/themeSwitch"
-                    style="@style/Shock"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginLeft="7dp"
-                    android:checked="true"
-                    android:fontFamily="casual"
-                    android:showText="false"
-                    android:text="Dark theme"
-                    android:textColor="?attr/colorAccent"
-                    android:textColorHighlight="?attr/colorPrimary"
-                    android:textOff="LIGHT"
-                    android:textOn="DARK"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toTopOf="@+id/yourAccountText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/aboutText" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
-                    android:id="@+id/aboutText"
+                    android:id="@+id/themecolortext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
                     android:fontFamily="casual"
                     android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:text="@string/AboutApp"
-                    android:textAlignment="center"
-                    android:textColor="?attr/colorPrimary"
+                    android:text="Theme Color"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/colorAccent"
                     android:textSize="18sp"
                     android:textStyle="bold|italic"
-                    android:typeface="serif"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/yourAccountText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="casual"
-                    android:text="Your account"
-                    android:textColor="?attr/colorAccent"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/userEnter"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.029"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/themeSwitch"
                     app:layout_constraintVertical_bias="1.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Switch
+                android:id="@+id/themeSwitch"
+                style="@style/Shock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:checked="true"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:showText="false"
+                android:text="Dark theme"
+                android:textColor="?attr/colorAccent"
+                android:textColorHighlight="?attr/colorPrimary"
+                android:textOff="LIGHT"
+                android:textOn="DARK"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/yourAccountText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:text="Your account"
+                android:textColor="?attr/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <EditText
                     android:id="@+id/userEnter"
@@ -131,12 +125,18 @@
                     android:ems="10"
                     android:hint="Your username..."
                     android:inputType="textPersonName"
-                    android:windowSoftInputMode="stateVisible|adjustPan"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.08"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/aboutText" />
+                    android:paddingLeft="5dp"
+                    android:windowSoftInputMode="stateVisible|adjustPan" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="#"
+                    android:textColor="?attr/colorAccent"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/tagEnter"
@@ -145,72 +145,59 @@
                     android:ems="10"
                     android:hint="Tag"
                     android:inputType="textPersonName"
-                    android:windowSoftInputMode="stateVisible|adjustPan"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/platformSelect"
-                    app:layout_constraintHorizontal_bias="0.476"
-                    app:layout_constraintStart_toEndOf="@+id/userEnter"
-                    app:layout_constraintTop_toTopOf="@+id/aboutText" />
+                    android:paddingLeft="10dp"
+                    android:windowSoftInputMode="stateVisible|adjustPan" />
 
-                <TextView
-                    android:id="@+id/saveAccountNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="148dp"
-                    android:text="@string/AccountOptional"
+                <Spinner
+                    android:id="@+id/platformSelect"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:background="?attr/colorPrimary"
+                    android:paddingLeft="10dp"
+                    android:spinnerMode="dialog"
                     android:textAlignment="center"
-                    android:textColor="?attr/colorPrimaryDark"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/submitAccount"
-                    app:layout_constraintVertical_bias="0.0" />
+                    android:textColor="?attr/colorAccent" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginLeft="9dp"
-                    android:layout_marginTop="79dp"
-                    android:layout_marginBottom="37dp"
-                    android:text="#"
-                    android:textColor="?attr/colorAccent"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/submitAccount"
-                    app:layout_constraintEnd_toStartOf="@+id/tagEnter"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/userEnter"
-                    app:layout_constraintTop_toBottomOf="@+id/themeSwitch"
-                    app:layout_constraintVertical_bias="1.0" />
+            <Button
+                android:id="@+id/submitAccount"
+                android:layout_width="175dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:text="save"
+                android:textAlignment="center"
+                android:textColor="?attr/colorAccent" />
 
-                <Switch
-                    android:id="@+id/scoresSwitch"
-                    style="@style/Shock"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="16dp"
-                    android:checked="false"
-                    android:fontFamily="casual"
-                    android:showText="false"
-                    android:text="Show OWL Scores"
-                    android:textColor="?attr/colorAccent"
-                    android:textColorHighlight="?attr/colorPrimary"
-                    android:textSize="18sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/saveAccountNote"
-                    app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/saveAccountNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AccountOptional"
+                android:textAlignment="center"
+                android:textColor="?attr/colorPrimaryDark"
+                android:textStyle="italic" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <Switch
+                android:id="@+id/scoresSwitch"
+                style="@style/Shock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:checked="false"
+                android:fontFamily="casual"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:showText="false"
+                android:text="Show OWL Scores"
+                android:textColor="?attr/colorAccent"
+                android:textColorHighlight="?attr/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
         </LinearLayout>
     </ScrollView>
 

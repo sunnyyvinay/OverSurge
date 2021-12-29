@@ -85,6 +85,7 @@
         android:layout_height="35dp"
         android:layout_weight="1"
         android:paddingTop="15dp"
+        android:tint="?attr/colorPrimary"
         app:srcCompat="@drawable/delete_ic" />
 
 </LinearLayout>

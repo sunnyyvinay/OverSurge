@@ -32,6 +32,7 @@ public class SettingsFragment extends Fragment {
     private EditText tagEnter;
     private Spinner platformSelect;
     private Switch scoresSwitch;
+    private Button themeColorSelect;
 
     private static final String[] consoles = {"PC", "XBOX", "PS4"};
 
@@ -56,6 +57,7 @@ public class SettingsFragment extends Fragment {
         tagEnter = view.findViewById(R.id.tagEnter);
         platformSelect = view.findViewById(R.id.platformSelect);
         scoresSwitch = view.findViewById(R.id.scoresSwitch);
+        themeColorSelect = view.findViewById(R.id.themeColorSelect);
 
         bottomNavigationView = getActivity().findViewById(R.id.navigation);
 
@@ -85,6 +87,14 @@ public class SettingsFragment extends Fragment {
         platformSelect.setAdapter(adapter);
 
         platformSelect.setSelection(settings.getInt("Platform", 0));
+
+        themeColorSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ThemeDialog cdd = new ThemeDialog(getActivity());
+                cdd.show();
+            }
+        });
 
         themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

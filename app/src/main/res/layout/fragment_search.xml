@@ -79,7 +79,6 @@
             android:background="?attr/colorPrimary"
             android:spinnerMode="dialog"
             android:textAlignment="center"
-            android:theme="@style/Shock"
             app:layout_constraintBottom_toTopOf="@+id/searchButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tagEnter"
