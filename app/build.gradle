@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.sunnyvinay.overstats"
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 28
         versionName "1.15.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
