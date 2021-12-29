@@ -20,10 +20,70 @@ public class PatchActivity extends AppCompatActivity {
 
         settings = getSharedPreferences("Settings", Context.MODE_PRIVATE);
 
-        if (settings.getBoolean("Theme", true)) {
-            this.setTheme(R.style.Shock);
-        } else {
-            this.setTheme(R.style.Shocklight);
+        switch (settings.getString("Theme Color", "Shock")) {
+            case ("Shock"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Shock);
+                } else {
+                    this.setTheme(R.style.Shocklight);
+                }
+                break;
+            case ("Crimson"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Crimson);
+                } else {
+                    this.setTheme(R.style.Crimsonlight);
+                }
+                break;
+            case ("Honey"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Honey);
+                } else {
+                    this.setTheme(R.style.Honeylight);
+                }
+                break;
+            case ("Lime"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Lime);
+                } else {
+                    this.setTheme(R.style.Limelight);
+                }
+                break;
+            case ("Emerald"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Emerald);
+                } else {
+                    this.setTheme(R.style.Emeraldlight);
+                }
+                break;
+            case ("Sky"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Sky);
+                } else {
+                    this.setTheme(R.style.Skylight);
+                }
+                break;
+            case ("Azure"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Azure);
+                } else {
+                    this.setTheme(R.style.Azurelight);
+                }
+                break;
+            case ("Violet"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Violet);
+                } else {
+                    this.setTheme(R.style.Violetlight);
+                }
+                break;
+            case ("Rose"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Rose);
+                } else {
+                    this.setTheme(R.style.Roselight);
+                }
+                break;
         }
 
         setContentView(R.layout.activity_news);
