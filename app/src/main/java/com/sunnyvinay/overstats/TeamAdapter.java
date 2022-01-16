@@ -48,9 +48,9 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         Picasso.get().load(teamList[position][1]).into(holder.icon);
 
         if (settings.getBoolean("Theme", true)) {
-            holder.name.setTextColor(context.getResources().getColor(R.color.shockWhite));
+            holder.name.setTextColor(context.getResources().getColor(R.color.white));
         } else {
-            holder.name.setTextColor(context.getResources().getColor(R.color.defiantBlack));
+            holder.name.setTextColor(context.getResources().getColor(R.color.black));
         }
     }
 

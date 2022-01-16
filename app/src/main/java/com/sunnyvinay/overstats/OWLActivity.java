@@ -101,6 +101,13 @@ public class OWLActivity extends AppCompatActivity {
                     this.setTheme(R.style.Azurelight);
                 }
                 break;
+            case ("Amethyst"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Amethyst);
+                } else {
+                    this.setTheme(R.style.Amethlight);
+                }
+                break;
             case ("Violet"):
                 if (settings.getBoolean("Theme", true)) {
                     this.setTheme(R.style.Violet);
@@ -113,6 +120,13 @@ public class OWLActivity extends AppCompatActivity {
                     this.setTheme(R.style.Rose);
                 } else {
                     this.setTheme(R.style.Roselight);
+                }
+                break;
+            case ("Berry"):
+                if (settings.getBoolean("Theme", true)) {
+                    this.setTheme(R.style.Berry);
+                } else {
+                    this.setTheme(R.style.Berrylight);
                 }
                 break;
         }

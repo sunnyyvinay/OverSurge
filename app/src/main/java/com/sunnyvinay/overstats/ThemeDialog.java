@@ -15,7 +15,7 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
     public Activity c;
     BottomNavigationView bottomNavigationView;
 
-    public Button shock, crimson, honey, lime, emerald, sky, azure, violet, rose;
+    public Button shock, crimson, honey, lime, emerald, sky, azure, amethyst, violet, rose, berry;
 
     SharedPreferences settings;
     private SharedPreferences.Editor settingsEditor;
@@ -40,6 +40,8 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         azure = findViewById(R.id.azureButton);
         violet = findViewById(R.id.violetButton);
         rose = findViewById(R.id.roseButton);
+        amethyst = findViewById(R.id.amethButton);
+        berry = findViewById(R.id.berryButton);
 
         shock.setOnClickListener(this);
         crimson.setOnClickListener(this);
@@ -50,6 +52,8 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
         azure.setOnClickListener(this);
         violet.setOnClickListener(this);
         rose.setOnClickListener(this);
+        amethyst.setOnClickListener(this);
+        berry.setOnClickListener(this);
 
         bottomNavigationView = c.findViewById(R.id.navigation);
         settingsEditor = settings.edit();
@@ -86,12 +90,20 @@ public class ThemeDialog extends Dialog implements View.OnClickListener {
                 settingsEditor.putString("Theme Color", "Azure");
                 settingsEditor.apply();
                 break;
+            case R.id.amethButton:
+                settingsEditor.putString("Theme Color", "Amethyst");
+                settingsEditor.apply();
+                break;
             case R.id.violetButton:
                 settingsEditor.putString("Theme Color", "Violet");
                 settingsEditor.apply();
                 break;
             case R.id.roseButton:
                 settingsEditor.putString("Theme Color", "Rose");
+                settingsEditor.apply();
+                break;
+            case R.id.berryButton:
+                settingsEditor.putString("Theme Color", "Berry");
                 settingsEditor.apply();
                 break;
             default:

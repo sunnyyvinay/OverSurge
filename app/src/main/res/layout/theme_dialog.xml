@@ -75,6 +75,13 @@
             android:background="@color/azure" />
 
         <Button
+            android:id="@+id/amethButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/amethyst" />
+
+        <Button
             android:id="@+id/violetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,5 +94,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/rose" />
+
+        <Button
+            android:id="@+id/berryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/berry" />
     </LinearLayout>
 </LinearLayout>
